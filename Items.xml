@@ -28,12 +28,11 @@
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
-      <StatusEffect type="OnUse" targettype="Contained" targets="manacell" Condition="-25.0" />
       <ParticleEmitter particle="muzzleflashnucleargun" particleamount="10" velocitymin="1" velocitymax="2" />
       <Propulsion force="-40" usablein="both">
         <RequiredItems items="manacell" type="Contained" />
       </Propulsion>
-      <RequiredItems items="manacell" type="Contained" msg="ItemMsgAmmoRequired" />
+      <RequiredItems items="manacell-f,manacell-s,manacell-c,manacell-a" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="80" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
@@ -44,7 +43,7 @@
     </Quality>
     <SkillRequirementHint identifier="weapons" level="80" />
   </Item>
-  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
+  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
@@ -66,9 +65,9 @@
         <Affliction identifier="burn" strength="0.15" />
       </StatusEffect>-->
     </Holdable>
-    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithId="manacell" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
       <Containable items="Fireball" />
-      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+      <StatusEffect type="OnUse" target="This" condition="-25" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
       <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
@@ -79,7 +78,7 @@
       <QualityStat stattype="Condition" value="0.1" />
     </Quality>
   </Item>
-  <Item name="" identifier="manacell-S" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
+  <Item name="" identifier="manacell-s" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
