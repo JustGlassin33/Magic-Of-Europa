@@ -43,7 +43,7 @@
     </Quality>
     <SkillRequirementHint identifier="weapons" level="80" />
   </Item>
-  <Item name="" identifier="manacell" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-F" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
@@ -72,6 +72,111 @@
       </StatusEffect>
       <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <Quality>
+      <QualityStat stattype="Condition" value="0.1" />
+    </Quality>
+  </Item>
+  <Item name="" identifier="manacell-S" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+    <Price sold="false">
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="lead" />
+      <Item identifier="incendium" />
+    </Deconstruct>
+    <PreferredContainer primary="wand" amount="1" spawnprobability="1.0" />
+    <PreferredContainer primary="wrecksecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.4" />
+    <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.5" />
+    <PreferredContainer secondary="researchcontainer" amount="1" spawnprobability="0.02" />
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
+    <Body radius="15" height="40" density="30" />
+    <Holdable slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+      <!--<StatusEffect type="OnContained" target="Character">
+        <Affliction identifier="burn" strength="0.15" />
+      </StatusEffect>-->
+    </Holdable>
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+      <Containable items="Spark_orb" />
+      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+        <SpawnItem identifiers="Spark_orb" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Spark_orb" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <Quality>
+      <QualityStat stattype="Condition" value="0.1" />
+    </Quality>
+  </Item>
+  <Item name="" identifier="manacell-C" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+    <Price sold="false">
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="lead" />
+      <Item identifier="incendium" />
+    </Deconstruct>
+    <PreferredContainer primary="wand" amount="1" spawnprobability="1.0" />
+    <PreferredContainer primary="wrecksecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.4" />
+    <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.5" />
+    <PreferredContainer secondary="researchcontainer" amount="1" spawnprobability="0.02" />
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
+    <Body radius="15" height="40" density="30" />
+    <Holdable slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+      <!--<StatusEffect type="OnContained" target="Character">
+        <Affliction identifier="burn" strength="0.15" />
+      </StatusEffect>-->
+    </Holdable>
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+      <Containable items="Confetti_orb" />
+      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+        <SpawnItem identifiers="Confetti_orb" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Confetti_orb" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <Quality>
+      <QualityStat stattype="Condition" value="0.1" />
+    </Quality>
+  </Item>
+  <Item name="" identifier="manacell-A" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+    <Price sold="false">
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="lead" />
+      <Item identifier="incendium" />
+    </Deconstruct>
+    <PreferredContainer primary="wand" amount="1" spawnprobability="1.0" />
+    <PreferredContainer primary="wrecksecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.4" />
+    <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.5" />
+    <PreferredContainer secondary="researchcontainer" amount="1" spawnprobability="0.02" />
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
+    <Body radius="15" height="40" density="30" />
+    <Holdable slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+      <!--<StatusEffect type="OnContained" target="Character">
+        <Affliction identifier="burn" strength="0.15" />
+      </StatusEffect>-->
+    </Holdable>
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+      <Containable items="Acid_Arrow" />
+      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+        <SpawnItem identifiers="Acid_Arrow" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Acid_Arrow" spawnposition="ThisInventory" />
       </StatusEffect>
     </ItemContainer>
     <Quality>
