@@ -28,7 +28,7 @@
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
-      <StatusEffect type="OnUse" targettype="Contained" targets="ManaCell-F" Condition="-25.0" />
+      <StatusEffect type="OnUse" targettype="Contained" targets="manacell-f" Condition="-25.0" />
       <ParticleEmitter particle="muzzleflashnucleargun" particleamount="10" velocitymin="1" velocitymax="2" />
       <Propulsion force="-40" usablein="both">
         <RequiredItems items="manacell" type="Contained" />
@@ -44,7 +44,7 @@
     </Quality>
     <SkillRequirementHint identifier="weapons" level="80" />
   </Item>
-  <Item name="" identifier="manacell-F" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
@@ -114,7 +114,7 @@
       <QualityStat stattype="Condition" value="0.1" />
     </Quality>
   </Item>
-  <Item name="" identifier="manacell-C" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-c" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
@@ -149,7 +149,7 @@
       <QualityStat stattype="Condition" value="0.1" />
     </Quality>
   </Item>
-  <Item name="" identifier="manacell-A" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-a" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false">
     </Price>
     <Deconstruct time="10">
@@ -185,7 +185,7 @@
     </Quality>
   </Item>
   <!--To DO add correct sprite info/ adjust damadge balance and effects as well as particles for all projectiles-->
-  <Item name="Fireball" identifier="Fireball" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+  <Item name="Fireball" identifier="fireball" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
     <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
     <Body width="170" height="10" density="20" />
     <Projectile damagedoors="true" removeonhit="false" characterusable="false" launchimpulse="20">
@@ -208,7 +208,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
-  <Item name="Spark_orb" identifier="Spark_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+  <Item name="Spark_orb" identifier="spark_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
     <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
     <Body width="170" height="10" density="20" />
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
@@ -223,7 +223,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
-  <Item name="Confetti_orb" identifier="Confetti_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+  <Item name="Confetti_orb" identifier="confetti_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
     <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
     <Body width="170" height="10" density="20" />
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
@@ -238,7 +238,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
-  <Item name="Acid_Arrow" identifier="Acid_Arrow" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+  <Item name="Acid_Arrow" identifier="acid_arrow" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
     <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
     <Body width="170" height="10" density="20" />
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
@@ -253,7 +253,7 @@
       </StatusEffect>
     </Projectile>
   </Item>
-  <Item name="Wizard Robes" identifier="Wizard Robes" category="Equipment" tags="smallitem,clothing,radiationproof" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+  <Item name="Wizard Robes" identifier="wizardrobes" category="Equipment" tags="smallitem,clothing,radiationproof" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
     <PreferredContainer primary="crewcab" />
     <PreferredContainer primary="outpostcrewcabinet" amount="1" spawnprobability="0.1" />
     <Price baseprice="150" requiredfaction="coalition">
