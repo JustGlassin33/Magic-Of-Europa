@@ -28,7 +28,7 @@
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
-      <StatusEffect type="OnUse" targettype="Contained" targets="manacell-f" Condition="-25.0" />
+      <StatusEffect type="OnUse" targettype="Contained" targets="manacell" Condition="-25.0" />
       <ParticleEmitter particle="muzzleflashnucleargun" particleamount="10" velocitymin="1" velocitymax="2" />
       <Propulsion force="-40" usablein="both">
         <RequiredItems items="manacell" type="Contained" />
