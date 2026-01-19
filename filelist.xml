@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<contentpackage name="Cappin J's Magic wands" modversion="0.0.3" corepackage="False" steamworkshopid="3610335130" gameversion="1.11.5.0">
+<contentpackage name="Magic of Europa" modversion="0.0.3" corepackage="False" steamworkshopid="3610335130" gameversion="1.11.5.0">
   <Item file="%ModDir%/Items.xml" />
   <Particles file="%ModDir%/Content/Particles/ParticlePrefabs.xml" />
 </contentpackage>
