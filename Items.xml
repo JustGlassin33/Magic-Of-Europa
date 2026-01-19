@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Items>
+  <Item name="" identifier="wand" category="Weapon,Alien" cargocontaineridentifier="metalcrate" tags="smallitem,weapon,provocativetohumanai" scale="0.5" impactsoundtag="impact_metal_light">
+    <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.02" />
+    <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.1" />
+    <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.3" />
+    <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder" />
+    <Price baseprice="5000">
+      <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" sold="false" multiplier="1.25" minavailable="1" />
+      <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" sold="false" multiplier="0.9" minavailable="1" />
+      <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" sold="false" multiplier="0.9" minavailable="1" />
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="incendium" />
+      <Item identifier="titaniumaluminumaloy" />
+      <Item identifier="lead" />
+      <Item identifier="steel" />
+    </Deconstruct>
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
+    <Body width="72" height="40" density="25" />
+    <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon barrelpos="29,11" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
+      <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+      <!-- To Do add sound files-->
+      <ParticleEmitter particle="muzzleflashnucleargun" particleamount="10" velocitymin="1" velocitymax="2" />
+      <Propulsion force="-40" usablein="both">
+        <RequiredItems items="manacell" type="Contained" />
+      </Propulsion>
+      <RequiredItems items="manacell" type="Contained" msg="ItemMsgAmmoRequired" />
+      <RequiredSkill identifier="weapons" level="80" />
+    </RangedWeapon>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
+      <Containable items="manacell" />
+    </ItemContainer>
+    <Quality>
+      <QualityStat stattype="FirepowerMultiplier" value="0.1" />
+    </Quality>
+    <SkillRequirementHint identifier="weapons" level="80" />
+  </Item>
+  <Item name="" identifier="manacell" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+    <Price sold="false">
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="lead" />
+      <Item identifier="incendium" />
+    </Deconstruct>
+    <PreferredContainer primary="wand" amount="1" spawnprobability="1.0" />
+    <PreferredContainer primary="wrecksecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.2" />
+    <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.4" />
+    <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.5" />
+    <PreferredContainer secondary="researchcontainer" amount="1" spawnprobability="0.02" />
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
+    <Body radius="15" height="40" density="30" />
+    <Holdable slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
+      <!--<StatusEffect type="OnContained" target="Character">
+        <Affliction identifier="burn" strength="0.15" />
+      </StatusEffect>-->
+    </Holdable>
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+      <Containable items="Fireball" />
+      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+        <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <Quality>
+      <QualityStat stattype="Condition" value="0.1" />
+    </Quality>
+  </Item>
+  <!--To DO add correct sprite info/ adjust damadge balance and effects as well as particles for all projectiles-->
+  <Item name="Fireball" identifier="Fireball" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+    <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+    <Body width="170" height="10" density="20" />
+    <Projectile damagedoors="true" removeonhit="false" characterusable="false" launchimpulse="20">
+      <Attack DamageRange="100" structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
+        <Affliction identifier="explosiondamage" strength="25" />
+        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="burn" strength="40" />
+      </Attack>
+      <StatusEffect type="OnNotcontained" target="This">
+          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
+        <Explosion range="50.0" force="10" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <Fire size="100" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This" stackable="false" delay="0.5">
+        <Remove />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="Spark_orb" identifier="Spark_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+    <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+    <Body width="170" height="10" density="20" />
+    <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
+      <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
+        <Affliction identifier="explosiondamage" strength="25" />
+        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="burn" strength="40" />
+      </Attack>
+      <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="Confetti_orb" identifier="Confetti_orb" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+    <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+    <Body width="170" height="10" density="20" />
+    <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
+      <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
+        <Affliction identifier="explosiondamage" strength="25" />
+        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="burn" strength="40" />
+      </Attack>
+      <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="Acid_Arrow" identifier="Acid_Arrow" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+    <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+    <Body width="170" height="10" density="20" />
+    <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
+      <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
+        <Affliction identifier="explosiondamage" strength="25" />
+        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="burn" strength="40" />
+      </Attack>
+      <StatusEffect type="OnImpact" target="This">
+          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+      </StatusEffect>
+    </Projectile>
+  </Item>
+  <Item name="Wizard Robes" identifier="Wizard Robes" category="Equipment" tags="smallitem,clothing,radiationproof" fireproof="true" cargocontaineridentifier="metalcrate" description="" scale="0.5" impactsoundtag="impact_soft">
+    <PreferredContainer primary="crewcab" />
+    <PreferredContainer primary="outpostcrewcabinet" amount="1" spawnprobability="0.1" />
+    <Price baseprice="150" requiredfaction="coalition">
+      <Price storeidentifier="merchantoutpost" minavailable="1" />
+      <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1" />
+      <Price storeidentifier="merchantresearch" minavailable="1" />
+      <Price storeidentifier="merchantmilitary" minavailable="1" />
+      <Price storeidentifier="merchantmine" minavailable="1" />
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="organicfiber" />
+    </Deconstruct>
+    <InventoryIcon name="Engineer Uniform 1 Icon" texture="Content/Items/Jobgear/OutfitIcons.png" sourcerect="0,150,128,107" origin="0.5,0.5" />
+    <Sprite name="Engineer Uniform 1" texture="Content/Items/Jobgear/MiscJobGear.png" sourcerect="375,293,121,64" depth="0.6" origin="0.5,0.5" />
+    <Body width="100" height="50" density="15" friction="0.8" restitution="0.01" />
+    <Wearable slots="Any,InnerClothes" msg="ItemMsgPickUpSelect">
+      <sprite name="Wizard Robes Torso" texture="Wizard_1.png" limb="Torso" hidelimb="false" inherittexturescale="true" sourcerect="168,28,96,191" origin="0.50261104,0.42050278" />
+      <sprite name="Wizard Robes Right Hand" texture="Wizard_1.png" limb="RightHand" hidelimb="true" inherittexturescale="true" origin="0.46061844,0.46636397" sourcerect="349,163,34,37" />
+      <sprite name="Wizard Robes Left Hand" texture="Wizard_1.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" origin="0.39748576,0.4392637" sourcerect="286,162,33,39" />
+      <sprite name="Wizard Robes Right Lower Arm" texture="Wizard_1.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" origin="0.48967662,0.4803051" sourcerect="349,102,35,60" />
+      <sprite name="Wizard Robes Left Lower Arm" texture="Wizard_1.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" origin="0.4986782,0.5143031" sourcerect="282,102,41,59" />
+      <sprite name="Wizard Robes Right Upper Arm" texture="Wizard_1.png" limb="Rightarm" hidelimb="true" inherittexturescale="true" origin="0.46941105,0.4428795" sourcerect="349,13,38,79" />
+      <sprite name="Wizard Robes Left Upper Arm" texture="Wizard_1.png" limb="Leftarm" hidelimb="true" inherittexturescale="true" origin="0.47473598,0.39788422" sourcerect="286,13,37,79" />
+      <sprite name="Wizard Robes Waist" texture="Wizard_1.png" limb="Waist" hidelimb="true" inherittexturescale="true" origin="0.5097177,0.5060716" sourcerect="421,23,70,55" />
+      <sprite name="Wizard Robes Right Thigh" texture="Wizard_1.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" origin="0.49627504,0.5228513" sourcerect="92,12,59,106" />
+      <sprite name="Wizard Robes Left Thigh" texture="Wizard_1.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" origin="0.48938265,0.54630697" sourcerect="12,13,57,104" />
+      <sprite name="Wizard Robes Right Leg" texture="Wizard_1.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" origin="0.45881715,0.6617953" sourcerect="101,136,37,112" />
+      <sprite name="Wizard Robes Left Leg" texture="Wizard_1.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" origin="0.4891367,0.66722333" sourcerect="17,137,44,111" />
+      <sprite name="Wizard Robes Left Shoe" texture="Wizard_1.png" limb="LeftFoot" hidelimb="true" inherittexturescale="true" origin="0.4417511,0.66167647" sourcerect="276,221,60,31" />
+      <sprite name="Wizard Robes Right Shoe" texture="Wizard_1.png" limb="RightFoot" hidelimb="true" inherittexturescale="true" origin="0.45977968,0.6958029" sourcerect="341,221,60,33" />
+      <!--sprite name="Wizard Head" texture="Wizard_1.png" limb="Head" hidelimb="false" inheritlimbdepth="true" sourcerect="169,188,88,70" inherittexturescale="false" origin="0.55,0.6" /> -->
+      <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.4" />
+      <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.8" />
+    </Wearable>
+  </Item>
+</Items>
