@@ -32,19 +32,19 @@
         <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
           <ActiveConditional HasTag="charged" />
         </LightComponent>
-          <!-- Fire the fireball Spell and consume some charge -->
+          <!-- Fire the fireball Spell -->
           <StatusEffect type="OnActive" target="Contained" condition="-25" comparison="And">
-            <Conditional HasTag="fire" />
+            <Conditional HasTag="charged-fire" />
             <Conditional condition="gte 25" />
             <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
           </StatusEffect>
-         <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
-        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
+         <!-- add the tag "charged-fire" when aimed with manacell-F-->
+        <StatusEffect type="OnSecondaryUse" target="This,contained" tags="charged-fire" comparison="and"  interval="1">
           <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
           <Conditional HasTag="loaded" />
           <Conditional condition="gte 25" />
         </StatusEffect>
-        <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
+        <!-- add the tag "charged-Spark" when aimed with manacell-S-->
         <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
           <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
           <Conditional HasTag="loaded" />
@@ -57,10 +57,9 @@
       </RangedWeapon>
     
       <!-- add the tag "loaded" when the item has a mana cell-->
-      <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1">
+      <StatusEffect type="OnContained" target="This" tags="loaded" comparison="And" interval="1">
         <Conditional HasTag="manacell" />
         <Conditional condition="gte 25" />
-        <Conditional IsOn="false" />
       </StatusEffect>
     <Quality>
       <QualityStat stattype="FirepowerMultiplier" value="0.1" />
@@ -188,6 +187,10 @@
       <StatusEffect type="OnUse" target="This" condition="-25" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
+      <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true">
+        <RequiredItem items="Fireball" type="Contained" />
+      </StatusEffect>
+      <Containable items="Firebolt" />
     </ItemContainer>
     <Quality>
       <QualityStat stattype="Condition" value="0.1" />
