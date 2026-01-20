@@ -49,6 +49,13 @@
           <Conditional condition="gte 25" />
             <SpawnItem identifier="fireball" spawnposition="ThisInventory" />
       </StatusEffect>
+       <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
+      <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
+        <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
+          <Conditional HasTag="loaded"/>
+          <Conditional condition="gte 25" />
+            <SpawnItem identifier="spark-orb" spawnposition="ThisInventory" />
+      </StatusEffect>
       <RequiredSkill identifier="weapons" level="80" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
