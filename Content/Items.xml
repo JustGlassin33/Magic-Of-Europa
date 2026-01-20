@@ -48,7 +48,6 @@
             <Conditional condition="gte 25" />
             <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
           </StatusEffect>
-        </LightComponent>
          <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
         <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
           <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
