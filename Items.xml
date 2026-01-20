@@ -37,7 +37,7 @@
           <Conditional HasTag="fire" />
           <Conditional condition="gte 25" />
           <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
-
+        </StatusEffect>
 
 
 
