@@ -18,7 +18,7 @@
       <Item identifier="incendium" />
       <Item identifier="titaniumaluminumaloy" />
       <Item identifier="lead" />
-      <Item identifier="steel" />dd
+      <Item identifier="steel" />
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
@@ -29,6 +29,7 @@
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
       <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
+      <RequiredSkill identifier="weapons" level="80" />
       <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
         <ActiveConditional HasTag="charged" />
         <ActiveConditional InWater="false" />
@@ -59,7 +60,6 @@
           <SpawnItem identifier="spark-orb" spawnposition="ThisInventory" />
         </StatusEffect>
       </ItemContainer>
-      <RequiredSkill identifier="weapons" level="80" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
       <Containable items="manacell" />
