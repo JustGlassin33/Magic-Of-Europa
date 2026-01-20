@@ -39,6 +39,15 @@
       <!-- To Do add sound files-->
       <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
       <RequiredSkill identifier="weapons" level="80" />
+      <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
+        <ActiveConditional HasTag="charged" />
+        <!-- Fire the fireball Spell and consume some charge -->
+        <StatusEffect type="OnActive" target="Contained" condition="0.25" comparison="And">
+          <Conditional HasTag="fire" />
+          <Conditional condition="gte 25" />
+          <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
+        </StatusEffect>
+      </LightComponent>
       <!-- Spell Inventory: -->
       <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
       <Containable items="manacell" />
