@@ -18,22 +18,20 @@
       <Item identifier="incendium" />
       <Item identifier="titaniumaluminumaloy" />
       <Item identifier="lead" />
-      <Item identifier="steel" />
+      <Item identifier="steel" />dd
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
-    <Sprite texture="%ModDir%/Staff.png" sourcerect="10,10,124,509" depth="0.55" origin="0.3730852,0.5007551" />
+    <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
     <Body width="50" height="20" density="25" />
     <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="5,-80" handle2="5,30" holdangle="-90" aimpos="40,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
-    <StatusEffect type="OnUse" target="Contained" targetslot="0" Condition="-100" />
-    <RequiredItems items="manacell-f" />
-    <RangedWeapon barrelpos="-200,270" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" maxchargetime="2" reload="3">
+    <RangedWeapon barrelpos="-200,270" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
       <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
-      <RequiredSkill identifier="weapons" level="80" />
       <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
         <ActiveConditional HasTag="charged" />
+        <ActiveConditional InWater="false" />
         <!-- Fire the fireball Spell and consume some charge -->
         <StatusEffect type="OnActive" target="Contained" condition="0.25" comparison="And">
           <Conditional HasTag="fire" />
@@ -41,45 +39,53 @@
           <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
         </StatusEffect>
       </LightComponent>
-      <!-- add the tag "charged-fire" when aimed with manacell-F-->
-      <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
-        <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
-        <Conditional HasTag="loaded" />
-        <Conditional condition="gte 25" />
-      </StatusEffect>
-      <!-- and add the tag "charged-Spark" when aimed with manacell-S-->
-      <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
-        <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
-        <Conditional HasTag="loaded" />
-        <Conditional condition="gte 25" />
-      </StatusEffect>
       <!-- Spell Inventory: -->
-      <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
-        <Containable items="manacell" />
+      <!-- Stores the 'Spell' to fire. Invisible, uninteractable. The 'Spell' items should self-destroy if not contained to prevent glitched states. Required! Only has one at a time. -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" AllowDragAndDrop="false" QuickUseMovesItemsInside="false" AllowSwappingContainedItems="false" containedstateindicatorstyle="bullet" DrawInventory="true">
+        <!-- Determines which spells can be used -->
+        <Containable items="fireball" />
+        <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
+        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
+          <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
+          <Conditional HasTag="loaded" />
+          <Conditional condition="gte 25" />
+          <SpawnItem identifier="fireball" spawnposition="ThisInventory" />
+        </StatusEffect>
+        <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
+        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
+          <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
+          <Conditional HasTag="loaded" />
+          <Conditional condition="gte 25" />
+          <SpawnItem identifier="spark-orb" spawnposition="ThisInventory" />
+        </StatusEffect>
       </ItemContainer>
+      <RequiredSkill identifier="weapons" level="80" />
     </RangedWeapon>
-    <!-- add the tag "loaded" when the item has a mana cell-->
-    <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1">
-      <Conditional HasTag="manacell" />
-      <Conditional condition="gte 25" />
-      <Conditional IsOn="false" />
-    </StatusEffect>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
+      <Containable items="manacell" />
+      <!-- add the tag "loaded" when the item has a mana cell-->
+      <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1" delay="1">
+        <Conditional HasTag="manacell" />
+        <Conditional condition="gte 25" />
+        <Conditional IsOn="false" />
+      </StatusEffect>
+    </ItemContainer>
     <Quality>
       <QualityStat stattype="FirepowerMultiplier" value="0.1" />
     </Quality>
     <SkillRequirementHint identifier="weapons" level="20" />
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
-      <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
-      <Button text="transform">
-        <StatusEffect type="OnUse" target="This">
-          <Remove />
-          <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
-        </StatusEffect>
-        <StatusEffect type="OnUse" target="This" targetcontainer="true">
-          <SpawnItem identifier="flamesword" spawnposition="SameInventory" />
-        </StatusEffect>
-      </Button>
-    </CustomInterface>
+        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <Button text="transform">
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+            <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnUse"  target="This" targetcontainer="true">  
+            <SpawnItem identifier="flamesword" spawnposition="SameInventory" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
   </Item>
   <Item name="" identifier="flamesword" category="Weapon" Tags="smallitem,weapon,gunsmith,mountableweapon,sharptool" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
     <PreferredContainer primary="secarmcab" secondary="armcab" />
@@ -138,18 +144,32 @@
     <SkillRequirementHint identifier="mechanical" level="50" />
     <SkillRequirementHint identifier="medical" level="50" />
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
-      <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
-      <Button text="transform">
-        <StatusEffect type="OnUse" target="This">
-          <Remove />
-          <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
-        </StatusEffect>
-        <StatusEffect type="OnUse" target="This" targetcontainer="true">
-          <SpawnItem identifier="firestaff" spawnposition="SameInventory" />
-        </StatusEffect>
-      </Button>
-    </CustomInterface>
+        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <Button text="transform">
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+            <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnUse"  target="This" targetcontainer="true">  
+            <SpawnItem identifier="firestaff" spawnposition="SameInventory" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
   </Item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
     <Price sold="false"></Price>
     <Deconstruct time="10">
@@ -171,15 +191,14 @@
         <Affliction identifier="burn" strength="0.15" />
       </StatusEffect>-->
     </Holdable>
-    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithTag="Spell-f" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithId="manacell" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
       <Containable items="Fireball" />
-      <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+      <StatusEffect type="OnUse" target="This" condition="-25" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
-      <StatusEffect type="OnUse" target="This,Container" condition="-100" disabledeltatime="true">
-        <RequiredItem item="Fireball" Type="Contained" />
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
-      <Containable items="Fireball" />
     </ItemContainer>
     <Quality>
       <QualityStat stattype="Condition" value="0.1" />
