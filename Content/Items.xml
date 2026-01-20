@@ -195,12 +195,13 @@
     </Holdable>
     <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithId="manacell" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
       <Containable items="Fireball" />
-      <StatusEffect type="OnUse" target="This" condition="-25" disabledeltatime="true">
+      <StatusEffect type="OnUse" target="This" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
-      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
-        <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
+      <StatusEffect type="OnUse" target="This" condition="-100" disabledeltatime="true">
+        <RequiredItem item="Fireball" Type="Contained" />
       </StatusEffect>
+      <Containable items="Fireball" />
     </ItemContainer>
     <Quality>
       <QualityStat stattype="Condition" value="0.1" />
