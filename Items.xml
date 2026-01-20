@@ -28,10 +28,24 @@
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
-      <!--Trying a tag system similar to the one used in immersive ignitables-->
+      <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
+    <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
+        <ActiveConditional HasTag="charged" />
+        <ActiveConditional InWater="false" />
+         <!-- Fire the fireball Spell and consume some charge -->
+        <StatusEffect type="OnActive" target="This" condition="-0.5" comparison="And">
+          <Conditional HasTag="fire" />
+          <Conditional condition="gte 25" />
+          <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
+
+
+
+
+
+      <!--Get spell ready to fire and add manafatigue if the wand has the tag "charged"-->
       <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="and" interval="1">
         <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
-          <Conditional HasTag="fire"/>
+          <Conditional HasTag="charged"/>
             <SpawnItem identifier="fireball" spawnposition="ThisInventory" />
             <Affliction identifier="Mana-fatigue" strength="10"/>
       </StatusEffect>
@@ -39,6 +53,12 @@
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
       <Containable items="manacell" />
+      <!-- add the tag "loaded" when the item has a mana cell-->
+        <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1" delay="1">
+          <Conditional HasTag="manacell" />
+          <Conditional condition="gte 25" />
+          <Conditional IsOn="false" />
+        </StatusEffect> 
     </ItemContainer>
     <Quality>
       <QualityStat stattype="FirepowerMultiplier" value="0.1" />
