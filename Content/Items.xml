@@ -23,43 +23,55 @@
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
     <Body width="50" height="20" density="25" />
+    <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
+        <ActiveConditional HasTag="charged" />
+        <!-- Fire the fireball Spell and consume some charge -->
+        <StatusEffect type="OnActive" target="Contained" condition="0.25" comparison="And">
+          <Conditional HasTag="fire" />
+          <Conditional condition="gte 25" />
+          <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
+        </StatusEffect>
+      </LightComponent>
     <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="5,-80" handle2="5,30" holdangle="-90" aimpos="40,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
       <RangedWeapon barrelpos="-200,270" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" maxchargetime="2" reload="3">
         <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
         <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
        <!-- To Do add sound files-->
        <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
+        <RequiredSkill identifier="weapons" level="80" />
         <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
           <ActiveConditional HasTag="charged" />
         </LightComponent>
-          <!-- Fire the fireball Spell -->
-          <StatusEffect type="OnActive" target="Contained" condition="-25" comparison="And">
-            <Conditional HasTag="charged-fire" />
+          <!-- Fire the fireball Spell and consume some charge -->
+          <StatusEffect type="OnActive" target="Contained" condition="0.25" comparison="And">
+            <Conditional HasTag="fire" />
             <Conditional condition="gte 25" />
             <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
           </StatusEffect>
-         <!-- add the tag "charged-fire" when aimed with manacell-F-->
-        <StatusEffect type="OnSecondaryUse" target="This,contained" tags="charged-fire" comparison="and"  interval="1">
+        </LightComponent>
+         <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
+        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
           <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
           <Conditional HasTag="loaded" />
           <Conditional condition="gte 25" />
         </StatusEffect>
-        <!-- add the tag "charged-Spark" when aimed with manacell-S-->
+        <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
         <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
           <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
           <Conditional HasTag="loaded" />
           <Conditional condition="gte 25" />
         </StatusEffect>
-        <!-- Spell Inventory: -->
-        <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
-          <Containable items="manacell" />
-        </ItemContainer>
-      </RangedWeapon>
+      <!-- Spell Inventory: -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
+      <Containable items="manacell" />
+      </ItemContainer>
+    </RangedWeapon>
     
       <!-- add the tag "loaded" when the item has a mana cell-->
-      <StatusEffect type="OnContained" target="This" tags="loaded" comparison="And" interval="1">
+      <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1">
         <Conditional HasTag="manacell" />
         <Conditional condition="gte 25" />
+        <Conditional IsOn="false" />
       </StatusEffect>
     <Quality>
       <QualityStat stattype="FirepowerMultiplier" value="0.1" />
@@ -187,10 +199,9 @@
       <StatusEffect type="OnUse" target="This" condition="-25" disabledeltatime="true">
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
-      <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true">
-        <RequiredItem items="Fireball" type="Contained" />
+      <StatusEffect type="OnContained" target="This" condition="0.02" disabledeltatime="true">
+        <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
-      <Containable items="Firebolt" />
     </ItemContainer>
     <Quality>
       <QualityStat stattype="Condition" value="0.1" />
