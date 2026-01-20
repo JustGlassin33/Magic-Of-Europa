@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Items>
-  <Item name="" identifier="firestaff" category="Weapon,Alien" cargocontaineridentifier="metalcrate" tags="smallitem,weapon,provocativetohumanai" scale="0.5" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="firestaff" category="Weapon,Alien" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,provocativetohumanai" scale="0.5" impactsoundtag="impact_metal_light">
     <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="1" spawnprobability="0.05" />
     <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.02" />
     <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.1" />
