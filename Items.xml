@@ -18,80 +18,159 @@
       <Item identifier="incendium" />
       <Item identifier="titaniumaluminumaloy" />
       <Item identifier="lead" />
-      <Item identifier="steel" />
+      <Item identifier="steel" />dd
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
-    <Sprite texture="%ModDir%/Staff.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
-    <Body width="72" height="40" density="25" />
-    <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect" />
-    <RangedWeapon barrelpos="29,11" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
+    <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
+    <Body width="50" height="20" density="25" />
+    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="5,-80" handle2="5,30" holdangle="0" aimpos="40,-30" aimangle="-90" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon barrelpos="-200,270" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
       <!--Trying a tag system similar to the one used in immersive ignitables 1 tag for holding any crystal and 1 for the type of magic and a -->
-    <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
+      <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false" comparison="And">
         <ActiveConditional HasTag="charged" />
         <ActiveConditional InWater="false" />
-         <!-- Fire the fireball Spell and consume some charge -->
+        <!-- Fire the fireball Spell and consume some charge -->
         <StatusEffect type="OnActive" target="Contained" condition="0.25" comparison="And">
           <Conditional HasTag="fire" />
           <Conditional condition="gte 25" />
           <ParticleEmitter particle="fleshsmoke" colormultiplier="120,120,120,150" particlespersecond="3" copyentityangle="true" anglemin="0" anglemax="0" distancemin="7" distancemax="7" velocitymin="0" velocitymax="0" scalemin="0.1" scalemax="0.1" />
         </StatusEffect>
       </LightComponent>
-
-
-<!-- Spell Inventory: -->
-        <!-- Stores the 'Spell' to fire. Invisible, uninteractable. The 'Spell' items should self-destroy if not contained to prevent glitched states. Required! Only has one at a time. -->
-    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" AllowDragAndDrop="false" QuickUseMovesItemsInside="false" AllowSwappingContainedItems="false" containedstateindicatorstyle="bullet" DrawInventory="true">
-      <!-- Determines which spells can be used -->
+      <!-- Spell Inventory: -->
+      <!-- Stores the 'Spell' to fire. Invisible, uninteractable. The 'Spell' items should self-destroy if not contained to prevent glitched states. Required! Only has one at a time. -->
+      <ItemContainer capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" AllowDragAndDrop="false" QuickUseMovesItemsInside="false" AllowSwappingContainedItems="false" containedstateindicatorstyle="bullet" DrawInventory="true">
+        <!-- Determines which spells can be used -->
         <Containable items="fireball" />
-      
-
-
-      <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
-      <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
-        <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
-          <Conditional HasTag="loaded"/>
+        <!--Get spell slotted and add the tag "charged-fire" when aimed with manacell-F-->
+        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-fire" comparison="and" targetitemcomponent="LightComponent" interval="1">
+          <RequiredItems item="manacell-f" type="Contained" targetslot="0" />
+          <Conditional HasTag="loaded" />
           <Conditional condition="gte 25" />
-            <SpawnItem identifier="fireball" spawnposition="ThisInventory" />
-      </StatusEffect>
-       <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
-      <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
-        <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
-          <Conditional HasTag="loaded"/>
+          <SpawnItem identifier="fireball" spawnposition="ThisInventory" />
+        </StatusEffect>
+        <!--Get spell slotted and add the tag "charged-Spark" when aimed with manacell-S-->
+        <StatusEffect type="OnSecondaryUse" target="This" tags="charged-spark" comparison="and" targetitemcomponent="LightComponent" interval="1">
+          <RequiredItems item="manacell-s" type="Contained" targetslot="0" />
+          <Conditional HasTag="loaded" />
           <Conditional condition="gte 25" />
-            <SpawnItem identifier="spark-orb" spawnposition="ThisInventory" />
-      </StatusEffect>
-    </ItemContainer>
+          <SpawnItem identifier="spark-orb" spawnposition="ThisInventory" />
+        </StatusEffect>
+      </ItemContainer>
       <RequiredSkill identifier="weapons" level="80" />
     </RangedWeapon>
-
-
-
-
-
-
-
-
-
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="9,0">
       <Containable items="manacell" />
       <!-- add the tag "loaded" when the item has a mana cell-->
-        <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1" delay="1">
-          <Conditional HasTag="manacell" />
-          <Conditional condition="gte 25" />
-          <Conditional IsOn="false" />
-        </StatusEffect> 
+      <StatusEffect type="OnContained" target="This" tags="loaded" targetitemcomponent="LightComponent" setvalue="true" comparison="And" interval="1" delay="1">
+        <Conditional HasTag="manacell" />
+        <Conditional condition="gte 25" />
+        <Conditional IsOn="false" />
+      </StatusEffect>
     </ItemContainer>
     <Quality>
       <QualityStat stattype="FirepowerMultiplier" value="0.1" />
     </Quality>
     <SkillRequirementHint identifier="weapons" level="80" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <Button text="transform">
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+            <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnUse"  target="This" targetcontainer="true">  
+            <SpawnItem identifier="magicsword" spawnposition="SameInventory" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
   </Item>
-  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
-    <Price sold="false">
+  <Item name="" identifier="magicsword" category="Weapon" Tags="smallitem,weapon,gunsmith,mountableweapon,sharptool" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="secarmcab" secondary="armcab" />
+    <Price baseprice="340" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="0.9" />
+      <Price storeidentifier="merchantmine" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="0.9" />
     </Price>
+    <Deconstruct time="10">
+      <Item identifier="titaniumaluminiumalloy" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="30">
+      <RequiredSkill identifier="weapons" level="40" />
+      <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
+    </Fabricate>
+    <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
+    <Body width="153" height="14" density="30" />
+    <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
+      <Attack targetimpulse="2" severlimbsprobability="0.55" itemdamage="6" structuredamage="1" structuresoundtype="StructureSlash">
+        <Affliction identifier="lacerations" strength="19" />
+        <Affliction identifier="bleeding" strength="14" />
+        <Affliction identifier="stun" strength="0.25" />
+      </Attack>
+      <StatusEffect type="OnUse" target="UseTarget">
+        <Conditional entitytype="eq Character" />
+        <Sound file="Content/Sounds/Damage/LimbSlash1.ogg" selectionmode="random" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash2.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash3.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash5.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="500" />
+      </StatusEffect>
+      <StatusEffect type="OnSuccess" target="This" reload="0.4" setvalue="true">
+        <Conditional reload="gt 0.4" />
+      </StatusEffect>
+      <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
+      <RequiredSkill identifier="weapons" level="50" />
+      <RequiredSkill identifier="helm" level="50" />
+      <RequiredSkill identifier="electrical" level="50" />
+      <RequiredSkill identifier="mechanical" level="50" />
+      <RequiredSkill identifier="medical" level="50" />
+      <!--Reset the reload speed-->
+      <StatusEffect type="OnUse" target="This" reload="0.75" setvalue="true" delay="1" />
+    </MeleeWeapon>
+    <aitarget sightrange="500" soundrange="250" fadeouttime="1" />
+    <Quality>
+      <QualityStat stattype="StrikingPowerMultiplier" value="0.15" />
+    </Quality>
+    <SkillRequirementHint identifier="weapons" level="50" />
+    <SkillRequirementHint identifier="helm" level="50" />
+    <SkillRequirementHint identifier="electrical" level="50" />
+    <SkillRequirementHint identifier="mechanical" level="50" />
+    <SkillRequirementHint identifier="medical" level="50" />
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <Button text="transform">
+          <StatusEffect type="OnUse" target="This">
+            <Remove />
+            <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+          </StatusEffect>
+          <StatusEffect type="OnUse"  target="This" targetcontainer="true">  
+            <SpawnItem identifier="wand" spawnposition="SameInventory" />
+          </StatusEffect>
+        </Button>
+      </CustomInterface>
+  </Item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+    <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
       <Item identifier="incendium" />
@@ -125,8 +204,7 @@
     </Quality>
   </Item>
   <Item name="" identifier="manacell-s" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
-    <Price sold="false">
-    </Price>
+    <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
       <Item identifier="incendium" />
@@ -160,8 +238,7 @@
     </Quality>
   </Item>
   <Item name="" identifier="manacell-c" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
-    <Price sold="false">
-    </Price>
+    <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
       <Item identifier="incendium" />
@@ -195,8 +272,7 @@
     </Quality>
   </Item>
   <Item name="" identifier="manacell-a" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" health="400">
-    <Price sold="false">
-    </Price>
+    <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
       <Item identifier="incendium" />
@@ -236,16 +312,16 @@
     <Projectile damagedoors="true" removeonhit="false" characterusable="false" launchimpulse="20">
       <Attack DamageRange="100" structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
         <Affliction identifier="explosiondamage" strength="25" />
-        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="stun" strength="25" />
         <Affliction identifier="burn" strength="40" />
       </Attack>
       <StatusEffect type="OnNotcontained" target="This">
-          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
-        <Explosion range="50.0" force="10" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20" Distance="3" />
+        <Explosion range="50.0" force="10" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
       </StatusEffect>
       <StatusEffect type="OnImpact" target="This">
-          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
-        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20" Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
         <Fire size="100" />
       </StatusEffect>
       <StatusEffect type="OnImpact" target="This" stackable="false" delay="0.5">
@@ -259,12 +335,12 @@
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
       <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
         <Affliction identifier="explosiondamage" strength="25" />
-        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="stun" strength="25" />
         <Affliction identifier="burn" strength="40" />
       </Attack>
       <StatusEffect type="OnImpact" target="This">
-          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
-        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20" Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
       </StatusEffect>
     </Projectile>
   </Item>
@@ -274,12 +350,12 @@
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
       <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
         <Affliction identifier="explosiondamage" strength="25" />
-        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="stun" strength="25" />
         <Affliction identifier="burn" strength="40" />
       </Attack>
       <StatusEffect type="OnImpact" target="This">
-          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
-        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20" Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
       </StatusEffect>
     </Projectile>
   </Item>
@@ -289,12 +365,12 @@
     <Projectile damagedoors="false" removeonhit="false" characterusable="false" launchimpulse="20">
       <Attack structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="5" targetimpulse="30">
         <Affliction identifier="explosiondamage" strength="25" />
-        <Affliction identifier="stun" strength="25" /> 
+        <Affliction identifier="stun" strength="25" />
         <Affliction identifier="burn" strength="40" />
       </Attack>
       <StatusEffect type="OnImpact" target="This">
-          <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20"  Distance="3" />
-        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0"  />
+        <ParticleEmitter particle="fireball" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="20" Distance="3" />
+        <Explosion range="500.0" force="20" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
       </StatusEffect>
     </Projectile>
   </Item>
