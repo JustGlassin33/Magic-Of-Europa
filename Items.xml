@@ -21,7 +21,7 @@
       <Item identifier="steel" />
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
-    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%/Staff.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
     <Body width="72" height="40" density="25" />
     <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect" />
     <RangedWeapon barrelpos="29,11" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3" DualWieldReloadTimePenaltyMultiplier="1.75" DualWieldAccuracyPenalty="8">
