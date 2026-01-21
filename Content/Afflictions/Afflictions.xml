@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Afflictions>
+ <Affliction name="magic fatigue" identifier="magicfatigue" description="The patient is has been using too much magic resulting in." type="poison" causeofdeathdescription="The patient was killed by their own hubris." selfcauseofdeathdescription="you have been killed by your own hubris" limbspecific="false" indicatorlimb="Torso" showiconthreshold="50" showinhealthscannerthreshold="20" maxstrength="100" affectmachines="false" healcostmultiplier="0" basehealcost="50" iconcolors="135,175,130,255;70,85,80,255;60,90,60,255">
+      <Description textidentifier="afflictiondescription.magicfatigue.self" target="Self" minstrength="0" maxstrength="100" />
+      <Description textidentifier="afflictiondescription.magicfatigue.others" target="OtherCharacter" minstrength="0" maxstrength="100" />
+      <Effect minstrength="0" maxstrength="10" strengthchange="10" minspeedmultiplier="1.0" maxspeedmultiplier="1.0" tag="poisoned" resistancefor="magicfatigueplayer" minresistance="1" maxresistance="1"></Effect>
+      <Effect minstrength="10" maxstrength="100" strengthchange="0.75" minscreenblur="0.1" maxscreenblur="1.0" minfacetint="255,255,255,0" maxfacetint="255,255,0,80" minbodytint="255,255,255,0" maxbodytint="255,255,0,60" minspeedmultiplier="1.0" maxspeedmultiplier="0.5" tag="poisoned" resistancefor="magicfatigueplayer" minresistance="1" maxresistance="1"></Effect>
+      <!-- bad effects from letting affliction ramp up -->
+      <PeriodicEffect mininterval="10" maxinterval="30" minstrength="40" maxstrength="100">
+        <StatusEffect target="Character" targetlimbs="Torso" disabledeltatime="true">
+          <Affliction identifier="nausea" amount="15" probability="0.25" />
+          <Affliction identifier="internaldamage" amount="5" probability="0.25" />
+          <Affliction identifier="psychosis" amount="30" probability="0.25" />
+          <Affliction identifier="burns" amount="20" probability="0.25" />
+        </StatusEffect>
+      </PeriodicEffect>
