@@ -22,7 +22,7 @@
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
-    <Body width="50" height="20" density="25" />
+    <Body width="50" height="20" density="25" />  
     <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="5,-80" handle2="5,30" holdangle="-90" aimpos="40,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
     <RangedWeapon barrelpos="-200,270" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
@@ -40,6 +40,10 @@
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery" itempos="9,0">
+            <!--Trying to lock Mana-Cell-->
+      <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
+        <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
+    </HoldableComponent>
         <Containable items="manacell-f" locked="true" />
     </ItemContainer>
     <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
@@ -141,11 +145,6 @@
     <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
     <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
     <Body radius="15" height="40" density="30" />
-    <Holdable slots="RightHand,LeftHand,Any" msg="ItemMsgPickUpSelect">
-      <!--<StatusEffect type="OnContained" target="Character">
-        <Affliction identifier="burn" strength="0.15" />
-      </StatusEffect>-->
-    </Holdable>
     <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithId="manacell" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
       <Containable items="Fireball" />
       <StatusEffect type="OnUse" target="This" disabledeltatime="true">
