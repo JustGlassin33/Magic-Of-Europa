@@ -29,9 +29,10 @@
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
       <!--Spawns the relevant manacell on staff creation so it can keep the ammo after switching back from sword-->
-      <StatusEffect type="OnSpawn"  target="This" targetcontainer="true">  
-            <SpawnItem identifier="manacell-f" spawnposition="SameInventory" />
+      <StatusEffect type="OnSpawn"  target="This" disableDeltaTime="true" targetSlot="0">  
+            <SpawnItem identifier="manacell-f" spawnposition="ThisInventory" />
           </StatusEffect>
+      <!--activate the mana cell-->    
       <StatusEffect type="OnUse" target="Contained">
         <Use />
       </StatusEffect>
