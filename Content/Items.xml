@@ -28,15 +28,20 @@
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!-- To Do add sound files-->
+      <!--Spawns the relevant manacell on staff creation so it can keep the ammo after switching back from sword-->
+      <StatusEffect type="OnSpawn"  target="This" targetcontainer="true">  
+            <SpawnItem identifier="manacell-f" spawnposition="SameInventory" />
+          </StatusEffect>
       <StatusEffect type="OnUse" target="Contained">
         <Use />
       </StatusEffect>
       <RequiredItems items="manacell-f" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
-    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="battery" itempos="9,0">
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery" itempos="9,0">
         <Containable items="manacell-f" locked="true" />
     </ItemContainer>
+    <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
         <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
         <Button text="transform">
