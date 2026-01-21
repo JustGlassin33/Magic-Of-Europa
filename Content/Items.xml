@@ -32,9 +32,10 @@
             <SpawnItem identifier="manacell-f" spawnposition="ThisInventory" />
           </StatusEffect>
       <!--activate the mana cell To Do add sound files--> 
-      <StatusEffect type="OnUse" target="Contained">
+      <StatusEffect type="OnUse" target="Contained,Character">
         <Conditional InWater="false" />
         <Use />
+        <Affliction identifier="magicfatigue" strength="20" />
       </StatusEffect>
       <RequiredItems items="manacell-f" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="20" />
