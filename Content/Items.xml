@@ -246,9 +246,9 @@
     <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
       <Attack targetimpulse="2" severlimbsprobability="0.55" itemdamage="6" structuredamage="1" structuresoundtype="StructureSlash">
         <Affliction identifier="lacerations" strength="19" />
-        <Affliction identifier="electricshock" strength="10" />
+        <Affliction identifier="electricshock" strength="20" />
         <Affliction identifier="bleeding" strength="10" />
-        <Affliction identifier="stun" strength="0.25" />
+        <Affliction identifier="stun" strength=".25" />
       </Attack>
       <StatusEffect type="OnUse" target="UseTarget">
         <Conditional entitytype="eq Character" />
