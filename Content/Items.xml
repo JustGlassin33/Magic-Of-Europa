@@ -154,6 +154,11 @@
         <SpawnItem identifiers="Fireball" spawnposition="ThisInventory" />
       </StatusEffect>
     </ItemContainer>
+    <ItemComponent>
+      <StatusEffect type="OnNotContained" target="This" stackable="false" disabledeltatime="true" delay="1">
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
   </Item>
   <Item name="Fireball" identifier="fireball" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
     <Sprite texture="%ModDir%/Fireball.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
