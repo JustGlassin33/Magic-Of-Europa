@@ -350,4 +350,180 @@
       </StatusEffect>
     </Projectile>
   </Item>
+  <Item name="" identifier="acidstaff" category="Weapon,Alien" cargocontaineridentifier="metalcrate" tags="mediumitem,weapon,provocativetohumanai" scale="0.5" impactsoundtag="impact_metal_light">
+    <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab,piratesecarmcab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.02" />
+    <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.1" />
+    <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.3" />
+    <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder" />
+    <Price baseprice="5000">
+      <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.6" />
+      <Price storeidentifier="merchantcity" sold="false" multiplier="1.25" minavailable="1" />
+      <Price storeidentifier="merchantresearch" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" sold="false" multiplier="0.9" minavailable="1" />
+      <Price storeidentifier="merchantmine" sold="false" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" sold="false" multiplier="0.9" minavailable="1" />
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="incendium" />
+      <Item identifier="titaniumaluminumaloy" />
+      <Item identifier="lead" />
+      <Item identifier="steel" />
+    </Deconstruct>
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
+    <Body width="50" height="20" density="25" />
+    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="-8,-100" handle2="-80,30" holdangle="-60" aimpos="75,-30" aimangle="-20" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon barrelpos="-100,210" rotation="-15" spread="2" unskilledspread="5" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
+      <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+      <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+      <!--Spawns the relevant manacell on staff creation so it can keep the ammo after switching back from sword-->
+      <StatusEffect type="OnSpawn" target="This" disableDeltaTime="true" targetSlot="0">
+        <SpawnItem identifier="manacell-a" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <!--activate the mana cell To Do add sound files-->
+      <StatusEffect type="OnUse" target="Contained,Character">
+        <Conditional InWater="false" />
+        <Use />
+        <Affliction identifier="magicfatigue" strength="20" />
+      </StatusEffect>
+      <RequiredItems items="manacell-a" type="Contained" msg="ItemMsgAmmoRequired" />
+      <RequiredSkill identifier="weapons" level="20" />
+    </RangedWeapon>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
+      <Containable items="manacell-a" hideitems="true" />
+    </ItemContainer>
+    <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+      <GuiFrame relativesize="0.10,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+      <Button text="transform">
+        <StatusEffect type="OnUse" target="This">
+          <Remove />
+          <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" targetcontainer="true">
+          <SpawnItem identifier="Acidsword" spawnposition="SameInventory" />
+        </StatusEffect>
+      </Button>
+    </CustomInterface>
+  </Item>
+  <Item name="" identifier="acidsword" category="Weapon" Tags="smallitem,weapon,gunsmith,mountableweapon,sharptool" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <PreferredContainer primary="secarmcab" secondary="armcab" />
+    <Price baseprice="340" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="0.9" />
+      <Price storeidentifier="merchantmine" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="0.9" />
+    </Price>
+    <Deconstruct time="10">
+      <Item identifier="titaniumaluminiumalloy" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="30">
+      <RequiredSkill identifier="weapons" level="40" />
+      <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
+    </Fabricate>
+    <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
+    <Body width="153" height="14" density="30" />
+    <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
+      <Attack targetimpulse="2" severlimbsprobability="0.55" itemdamage="6" structuredamage="1" structuresoundtype="StructureSlash">
+        <Affliction identifier="lacerations" strength="19" />
+        <Affliction identifier="acidburn" strength="20" />
+        <Affliction identifier="bleeding" strength="10" />
+        <Affliction identifier="stun" strength="0.25" />
+      </Attack>
+      <StatusEffect type="OnUse" target="UseTarget">
+        <Conditional entitytype="eq Character" />
+        <Sound file="Content/Sounds/Damage/LimbSlash1.ogg" selectionmode="random" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash2.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash3.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash5.ogg" range="500" />
+        <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="500" />
+      </StatusEffect>
+      <StatusEffect type="OnSuccess" target="This" reload="0.4" setvalue="true">
+        <Conditional reload="gt 0.4" />
+      </StatusEffect>
+      <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true" />
+      <RequiredSkill identifier="weapons" level="50" />
+      <RequiredSkill identifier="helm" level="50" />
+      <RequiredSkill identifier="electrical" level="50" />
+      <RequiredSkill identifier="mechanical" level="50" />
+      <RequiredSkill identifier="medical" level="50" />
+      <!--Reset the reload speed-->
+      <StatusEffect type="OnUse" target="This" reload="0.75" setvalue="true" delay="1" />
+    </MeleeWeapon>
+    <aitarget sightrange="500" soundrange="250" fadeouttime="1" />
+    <Quality>
+      <QualityStat stattype="StrikingPowerMultiplier" value="0.15" />
+    </Quality>
+    <SkillRequirementHint identifier="weapons" level="50" />
+    <SkillRequirementHint identifier="helm" level="50" />
+    <SkillRequirementHint identifier="electrical" level="50" />
+    <SkillRequirementHint identifier="mechanical" level="50" />
+    <SkillRequirementHint identifier="medical" level="50" />
+    <!--Fire particle effect for the sword-->
+    <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false">
+      <StatusEffect type="OnUse" target="This" IsOn="false" setvalue="true">
+        <ParticleEmitter particle="transparentFire" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
+      </StatusEffect>
+    </LightComponent>
+    <!--Transform Gui-->
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+      <GuiFrame relativesize="0.10,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+      <Button text="transform">
+        <StatusEffect type="OnUse" target="This">
+          <Remove />
+          <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+        </StatusEffect>
+        <StatusEffect type="OnUse" target="This" targetcontainer="true">
+          <SpawnItem identifier="acidstaff" spawnposition="SameInventory" />
+        </StatusEffect>
+      </Button>
+    </CustomInterface>
+  </Item>
+  <Item name="" identifier="manacell-a" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" allowdroppingonswap="false" nonplayerteaminteractable="True">
+    <Price sold="false"></Price>
+    <Deconstruct time="10">
+      <Item identifier="lead" />
+      <Item identifier="incendium" />
+    </Deconstruct>
+    <PreferredContainer primary="acidstaff" amount="1" spawnprobability="1.0" />
+    <!--To DO add sprite/icon correct path   -->
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
+    <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
+    <Body radius="15" height="40" density="30" />
+    <ItemContainer hideitems="true" capacity="1" drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true" SpawnWithId="manacell" removecontaineditemsondeconstruct="true" containedstateindicatorstyle="battery">
+      <Containable items="acidarrow" />
+      <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+        <SpawnItem identifiers="acidarrow" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </ItemContainer>
+    <ItemComponent>
+      <StatusEffect type="OnNotContained" target="This" stackable="false" disabledeltatime="true" delay="1">
+        <Remove />
+      </StatusEffect>
+    </ItemComponent>
+  </Item>
+  <Item name="Acid Arrow" identifier="acidarrow" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+    <Sprite texture="%ModDir%/AcidArrow.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+    <Body width="170" height="10" density="20" />
+    <Projectile damagedoors="true" removeonhit="true" characterusable="false" launchimpulse="20">
+      <Attack DamageRange="100" structuredamage="20" ballastfloradamage="200" itemdamage="20" ranged="true" levelwalldamage="20" targetforce="30" severlimbsprobability="25" penetration="0" targetimpulse="30">
+        <Affliction identifier="lacerations" strength="10" />
+        <Affliction identifier="bleeding" strength="10" />
+        <Affliction identifier="stun" strength="25" />
+        <Affliction identifier="acidburn" strength="40" />
+      </Attack>
+      <StatusEffect type="OnNotcontained" target="This">
+        <ParticleEmitter particle="flames" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
+      </StatusEffect>
+      <StatusEffect type="OnImpact" target="This">
+        <ParticleEmitter particle="flames" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
+        <Explosion range="500.0" force="20" showEffects="true" camerashake="40.0" />
+        <Fire size="100" />
+      </StatusEffect>
+    </Projectile>
+  </Item>
 </Items>
