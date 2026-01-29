@@ -171,11 +171,10 @@
       </Attack>
       <StatusEffect type="OnNotcontained" target="This">
         <ParticleEmitter particle="flames" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
-        <Explosion range="50.0" force="10" shockwave="true" smoke="true" flames="false" sparks="false" underwaterbubble="false" camerashake="20.0" />
       </StatusEffect>
       <StatusEffect type="OnImpact" target="This">
         <ParticleEmitter particle="flames" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
-        <Explosion range="500.0" force="20" showEffects="true" camerashake="20.0" />
+        <Explosion range="500.0" force="20" showEffects="true" camerashake="40.0" />
         <Fire size="100" />
       </StatusEffect>
     </Projectile>
