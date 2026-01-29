@@ -41,7 +41,7 @@
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
     <ItemContainer capacity="1" maxstacksize="1" hideitems="false" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery" itempos="9,0">
-            <!--Trying to lock Mana-Cell-->
+            <!-- lock Mana-Cell-->
       <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
         <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
     </HoldableComponent>
@@ -49,7 +49,7 @@
     </ItemContainer>
     <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
-        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <GuiFrame relativesize="0.10,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
         <Button text="transform">
           <StatusEffect type="OnUse" target="This">
             <Remove />
@@ -117,8 +117,9 @@
     <SkillRequirementHint identifier="electrical" level="50" />
     <SkillRequirementHint identifier="mechanical" level="50" />
     <SkillRequirementHint identifier="medical" level="50" />
+    <!--Transform Gui-->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
-        <GuiFrame relativesize="0.15,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
+        <GuiFrame relativesize="0.10,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
         <Button text="transform">
           <StatusEffect type="OnUse" target="This">
             <Remove />
