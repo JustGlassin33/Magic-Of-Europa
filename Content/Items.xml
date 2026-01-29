@@ -45,7 +45,7 @@
       <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
         <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
     </HoldableComponent>
-        <Containable items="manacell-f" locked="true" />
+        <Containable items="manacell-f" hideitems="true" locked="true" />
     </ItemContainer>
     <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
@@ -144,11 +144,6 @@
       <Item identifier="incendium" />
     </Deconstruct>
     <PreferredContainer primary="firestaff" amount="1" spawnprobability="1.0" />
-    <PreferredContainer primary="wrecksecarmcab" amount="1" spawnprobability="0.05" />
-    <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.2" />
-    <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.4" />
-    <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.5" />
-    <PreferredContainer secondary="researchcontainer" amount="1" spawnprobability="0.02" />
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="0,1952,34,77" depth="0.7" origin="0.5,0.5" />
     <LightComponent AllowInGameEditing="false" lightcolor="112,146,190,30" canbeselected="false" range="100.0" IsOn="true" castshadows="false" />
