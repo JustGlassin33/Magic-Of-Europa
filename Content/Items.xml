@@ -682,4 +682,122 @@
       </StatusEffect>
     </Projectile>
   </Item>
+
+
+
+
+
+   <Item name="" identifier="blackholegrenade" category="Weapon" maxstacksize="32" maxstacksizecharacterinventory="8" cargocontaineridentifier="explosivecrate" tags="smallitem,weapon,explosive,demolitionsexpert,handgrenade" Scale="0.5" impactsoundtag="impact_metal_heavy">
+    <PreferredContainer primary="secarmcab" minamount="1" maxamount="3" spawnprobability="0.75" notcampaign="true" notpvp="true" />
+    <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="2" spawnprobability="0.05" />
+    <PreferredContainer secondary="armcab" />
+    <Price baseprice="80" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="1.5" />
+      <Price storeidentifier="merchantcity" multiplier="1.25" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" mindifficulty="60" sold="true" />
+      <Price storeidentifier="merchantmilitary" multiplier="0.9" mindifficulty="60" sold="true" />
+      <Price storeidentifier="merchantmine" multiplier="1.25" />
+      <Price storeidentifier="merchantarmory" multiplier="0.9" />
+    </Price>
+    <Deconstruct time="5" />
+    <Fabricate suitablefabricators="fabricator" requiredtime="20" amount="2" requiresrecipe="true">
+      <RequiredSkill identifier="weapons" level="40" />
+      <RequiredItem identifier="iron" amount="2" />
+      <RequiredItem identifier="sulphuricacid" />
+    </Fabricate>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas2.png" sourcerect="576,448,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="79,414,26,54" depth="0.55" origin="0.5,0.5" />
+    <BrokenSprite texture="Content/Items/Weapons/weapons_new.png" name="chemgrenade" sourcerect="487,186,24,54" depth="0.55" origin="0.5,0.5185185" maxcondition="99.9" />
+    <Body width="26" height="54" density="30" friction="1.0" angulardamping="20.0" />
+    <Throwable characterusable="false" slots="Any,RightHand,LeftHand" throwforce="3.5" aimpos="35,-10" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnBroken" target="This">
+        <sound file="Content/Items/Weapons/StunGrenade.ogg" />
+        <Explosion range="500" ballastfloradamage="0" itemdamage="0" force="0.5" sparks="true" shockwave="false" flames="false" smoke="false" flash="true">
+          <Affliction identifier="acidburn" strength="30" />
+          <Affliction identifier="acidburn" strength="15" probability="0.2" dividebylimbcount="false" />
+          <Affliction identifier="stun" strength="0.5" />
+        </Explosion>
+      </StatusEffect>
+      <StatusEffect type="OnBroken" target="This" delay="0.2">
+        <SpawnItem identifier="acidmistemitter" count="10" aimspread="360" impulse="30" rotationtype="Collider" rotation="0" spawnposition="This" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnUse" targettype="This" Condition="0" setvalue="true" comparison="OR">
+        <Conditional HasTag="detonator" targetcontainer="true" />
+        <Conditional HasTag="railgunammo" targetcontainer="true" />
+        <Conditional HasTag="depthchargeammo" targetcontainer="true" />
+      </StatusEffect>
+      <StatusEffect type="OnSecondaryUse" target="This" disabledeltatime="true" checkconditionalalways="true">
+        <Conditional IsActive="false" targetitemcomponent="ItemComponent" />
+        <Use />
+      </StatusEffect>
+    </Throwable>
+    <ItemComponent IsActive="false" CharacterUsable="true">
+      <!--reduce condition by 1 to mark the user as the one responsible for the item breaking and exploding -->
+      <StatusEffect type="OnUse" targettype="This" IsActive="true" DontCleanUp="true" comparison="AND" condition="-1">
+        <Conditional HasTag="neq detonator" targetcontainer="true" />
+        <Conditional HasTag="neq railgunammo" targetcontainer="true" />
+        <Conditional HasTag="neq depthchargeammo" targetcontainer="true" />
+        <Conditional IsActive="false" targetitemcomponent="ItemComponent" />
+        <ParticleEmitter particle="grenadepin" emitinterval="10" particleamount="1" anglemin="70" anglemax="100" velocitymin="100" velocitymax="200" copyentityangle="true" scalemin="0.5" scalemax="0.5" />
+        <ParticleEmitter particle="grenadelever" emitinterval="10" particleamount="1" anglemin="120" anglemax="210" velocitymin="100" velocitymax="200" copyentityangle="true" scalemin="0.5" scalemax="0.5" />
+        <Sound file="Content/Items/Weapons/pinpull.ogg" type="OnUse" range="720" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" targettype="This" Condition="-30">
+        <ParticleEmitter particle="flamethrowersmoke" particlespersecond="25" anglemin="0" anglemax="0" velocitymin="75" velocitymax="125" copyentityangle="true" scalemin="0.1" scalemax="0.15" colormultiplier="255,255,255,150" />
+      </StatusEffect>
+    </ItemComponent>
+    <Quality>
+      <QualityStat stattype="ExplosionRadius" value="0.1" />
+      <QualityStat stattype="ExplosionDamage" value="0.1" />
+    </Quality>
+  </Item>
+  <Item name="Blackhole" identifier="blackhole" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
+      <Sprite texture="%ModDir%/brapper.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
+      <Body width="170" height="10" density="20" />
+      <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-100,0" handle2="10,0" aimable="false" />
+      <Projectile damagedoors="true" removeonhit="false" characterusable="false" launchimpulse="32.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodeflective="false" sticktodoors="false" sticktolighttargets="false">
+        <Attack structuredamage="500" ballastfloradamage="200" itemdamage="500" ranged="true" levelwalldamage="500" targetforce="100" severlimbsprobability="1000" penetration="1000" duration="3" targetimpulse="100">
+          <Affliction identifier="explosiondamage" strength="1000" />
+          <Affliction identifier="stun" strength="1000" />
+        </Attack>
+        <StatusEffect type="OnImpact" target="NearbyCharacters" delay="0" range="300" stackable="false">
+          <RemoveCharacter />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="NearbyCharacters" delay="0.1" range="50" stackable="false">
+          <RemoveCharacter />
+        </StatusEffect>
+      </Projectile>
+      <LightComponent lightcolor="255,255,255,255" range="1" powerconsumption="0" allowingameediting="false" castshadows="false" IsOn="true">
+        <Sprite name="hollowpurple" texture="%ModDir%/brapper.png" sourcerect="0,0,512,512" origin="0.5,0.5" depth="0.6" />
+        <StatusEffect type="Always" target="This" scale="-0.02" condition="-1">
+          <ParticleEmitter particle="ElectricShock" burstamount="3" particlespersecond="5" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" scalemin="5.0" scalemax="5.0" colormultiplier="0,0,0,255" />
+        </StatusEffect>
+        <StatusEffect type="OnNotContained" target="This" delay="0.2" stackable="false" Comparison="And">
+          <Conditional scale="gt 0.1" />
+          <Conditional scale="lt 2.5" />
+          <Explosion range="600" force="-50" stun="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="false" camerashake="30" camerashakerange="150" underwaterbubble="false" structuredamage="500" itemdamage="500" flashrange="300" flashduration="10" />
+        </StatusEffect>
+        <StatusEffect delay="0" stackable="false" type="Always" target="This">
+          <Conditional scale="lt 0.1" />
+          <Conditional scale="gt 2.5" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect delay="0.0" stackable="false" type="Always" target="This" setvalue="true" condition="0">
+          <Conditional scale="gt 6.0" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 95" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 80" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 55" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.05">
+          <Conditional Condition="gt 15" />
+        </StatusEffect>
+      </LightComponent>
+    </Item>
 </Items>
