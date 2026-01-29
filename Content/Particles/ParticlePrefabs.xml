@@ -44,7 +44,7 @@
   </fireball>
   <flames
   drawontop="False"
-  LifeTime="0.8"
+  LifeTime="0.6"
   LifeTimeMin="0"
   StartDelayMin="0"
   StartDelayMax="0"
@@ -65,7 +65,7 @@
   Friction="0.5"
   Restitution="0.1"
   StartSizeMin="0.5,0.3"
-  StartSizeMax="0.8,0.5"
+  StartSizeMax="0.6,0.5"
   SizeChangeMin="0.2,0.2"
   SizeChangeMax="0.4,0.4"
   GrowTime="0.2"
