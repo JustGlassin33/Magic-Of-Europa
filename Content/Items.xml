@@ -40,12 +40,8 @@
       <RequiredItems items="manacell-f" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
-    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
-            <!-- lock Mana-Cell-->
-      <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
-        <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
-    </HoldableComponent>
-        <Containable items="manacell-f" hideitems="true" locked="true" />
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
+        <Containable items="manacell-f" hideitems="true" />
     </ItemContainer>
     <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
@@ -137,7 +133,7 @@
         </Button>
       </CustomInterface>
   </Item>
-  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-f" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" allowdroppingonswap="false" nonplayerteaminteractable="True">
     <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
@@ -219,12 +215,8 @@
       <RequiredItems items="manacell-s" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
-    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
-            <!-- lock Mana-Cell-->
-      <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
-        <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
-    </HoldableComponent>
-        <Containable items="manacell-s" locked="true" />
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
+        <Containable items="manacell-s" />
     </ItemContainer>
     <!--Gui to transform staff into sword by deleting the staff and spawning the sword -->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
@@ -316,7 +308,7 @@
         </Button>
       </CustomInterface>
   </Item>
-  <Item name="" identifier="manacell-s" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="manacell-s" category="Alien,Equipment" maxstacksize="8" Tags="alien,smallitem,manacell" scale="0.3" impactsoundtag="impact_metal_light" allowdroppingonswap="false" nonplayerteaminteractable="True" >
     <Price sold="false"></Price>
     <Deconstruct time="10">
       <Item identifier="lead" />
