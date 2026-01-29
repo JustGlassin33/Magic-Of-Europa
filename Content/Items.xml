@@ -70,10 +70,6 @@
     <Deconstruct time="10">
       <Item identifier="titaniumaluminiumalloy" />
     </Deconstruct>
-    <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="30">
-      <RequiredSkill identifier="weapons" level="40" />
-      <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
-    </Fabricate>
     <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
     <Body width="153" height="14" density="30" />
     <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
@@ -245,10 +241,6 @@
     <Deconstruct time="10">
       <Item identifier="titaniumaluminiumalloy" />
     </Deconstruct>
-    <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="30">
-      <RequiredSkill identifier="weapons" level="40" />
-      <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
-    </Fabricate>
     <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
     <Body width="153" height="14" density="30" />
     <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
@@ -420,10 +412,6 @@
     <Deconstruct time="10">
       <Item identifier="titaniumaluminiumalloy" />
     </Deconstruct>
-    <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="30">
-      <RequiredSkill identifier="weapons" level="40" />
-      <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
-    </Fabricate>
     <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
     <Body width="153" height="14" density="30" />
     <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
