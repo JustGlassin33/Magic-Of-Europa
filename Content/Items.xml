@@ -18,13 +18,13 @@
       <Item identifier="incendium" />
       <Item identifier="titaniumaluminumaloy" />
       <Item identifier="lead" />
-      <Item identifier="steel" />dd
+      <Item identifier="steel" />
     </Deconstruct>
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
     <Body width="50" height="20" density="25" />  
-    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="5,-80" handle2="5,30" holdangle="-90" aimpos="40,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
-    <RangedWeapon barrelpos="-200,270" rotation="-15" spread="2" unskilledspread="15" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
+    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="-8,-100" handle2="-80,30" holdangle="-90" aimpos="75,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
+    <RangedWeapon barrelpos="-100,210" rotation="-15" spread="2" unskilledspread="5" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
       <!--Spawns the relevant manacell on staff creation so it can keep the ammo after switching back from sword-->
