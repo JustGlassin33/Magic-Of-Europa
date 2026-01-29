@@ -23,7 +23,7 @@
     <!--To DO add sprite/icon correct path   -->
     <Sprite texture="%ModDir%/Staff.png" sourcerect="11,6,122,511" depth="0.55" origin="0.3730852,0.5007551" />
     <Body width="50" height="20" density="25" />  
-    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="-8,-100" handle2="-80,30" holdangle="-90" aimpos="75,-30" aimangle="0" msg="ItemMsgPickUpSelect" />
+    <Holdable slots="Any,RightHand+LeftHand" holdpos="35,0" handle1="-8,-100" handle2="-80,30" holdangle="-60" aimpos="75,-30" aimangle="-20" msg="ItemMsgPickUpSelect" />
     <RangedWeapon barrelpos="-100,210" rotation="-15" spread="2" unskilledspread="5" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2" reload="3">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
@@ -40,7 +40,7 @@
       <RequiredItems items="manacell-f" type="Contained" msg="ItemMsgAmmoRequired" />
       <RequiredSkill identifier="weapons" level="20" />
     </RangedWeapon>
-    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery" itempos="9,0">
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="3,160" locked="true" containedstateindicatorslot="0" containedstateindicatorstyle="battery">
             <!-- lock Mana-Cell-->
       <HoldableComponent AllowInGameEditing="false" locked="true" canbeselected="false" attachable="true">
         <ConnectionPanel  pickingtime="0" canbepicked="False" allowingameediting="False" msg="" />
@@ -117,6 +117,12 @@
     <SkillRequirementHint identifier="electrical" level="50" />
     <SkillRequirementHint identifier="mechanical" level="50" />
     <SkillRequirementHint identifier="medical" level="50" />
+    <!--Fire particle effect for the sword-->
+     <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false">
+        <StatusEffect type="OnUse" target="This" IsOn="false" setvalue="true">
+          <ParticleEmitter particle="transparentFire" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
+        </StatusEffect>
+     </LightComponent>
     <!--Transform Gui-->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
         <GuiFrame relativesize="0.10,0.1" anchor="BottomCenter" pivot="BottomCenter" relativeoffset="0,0.1" style="ItemUI" />
