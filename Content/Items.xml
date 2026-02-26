@@ -758,6 +758,10 @@
       <StatusEffect type="OnNotContained" target="This">
         <sound file="Content/Items/Alien/ALIEN_gravitySphereLoop.ogg" range="800.0" loop="true" dontmuffle="true" />
       </StatusEffect>
+       <!-- remove after 10 seconds  -->
+        <StatusEffect type="OnNotContained" target="This" delay="15" disabledeltatime="true">
+        <Remove />
+      </StatusEffect>
     </LightComponent>
     <!--Apply force towards the center at range 1000-->
     <TriggerComponent triggeredby="Human, Item" force="75" radius="1000" distancebasedforce="true">
@@ -787,29 +791,6 @@
         <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="300" distancemax="400" velocitymin="-700" velocitymax="-1200" particlespersecond="100" colormultiplier="255,180,255,255" />
       </StatusEffect>
     </TriggerComponent>
-    <ConnectionPanel canbeselected="true" hudpriority="10" locked="True" allowingameediting="False">
-      <RequiredItem items="screwdriver" type="Equipped" />
-      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
-      <input name="toggle" displayname="connection.togglestate" />
-      <input name="set_state" displayname="connection.setstate" />
-      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
-      <!--Break the item when a shutdown signal is received-->
-      <input name="shutdown" displayname="connection.shutdown">
-        <StatusEffect type="OnUse" target="This" condition="-100" setvalue="true" />
-      </input>
-      <StatusEffect type="OnDamaged" target="This">
-        <ParticleEmitter particle="plasmaspark" drawontop="true" particleamount="5" scalemin="0.3" scalemax="0.5" velocitymin="300" velocitymax="800" anglemin="0" anglemax="360" />
-        <ParticleEmitter particle="risingbubbles" particleamount="1" anglemin="90" anglemax="90" velocitymin="50" velocitymax="100" scalemin="0.5" scalemax="1" />
-        <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="2000" />
-      </StatusEffect>
-      <StatusEffect type="OnDamaged" target="This" isActive="false" Duration="1" stackable="false" />
-      <StatusEffect type="OnBroken" target="This" setvalue="true" noninteractable="true">
-        <ParticleEmitter particle="underwaterexplosionfast" particleamount="3" anglemin="0" anglemax="360" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2.5" />
-        <ParticleEmitter particle="risingbubbles" particleamount="1" anglemin="90" anglemax="90" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2" startdelaymin="0.1" startdelaymax="0.3" />
-        <sound file="Content/Sounds/Damage/Implode.ogg" range="50000" dontmuffle="true" soundselectionmode="All" />
-        <sound file="Content/Items/Weapons/Emp.ogg" dontmuffle="true" range="100000" />
-      </StatusEffect>
-    </ConnectionPanel>
   </Item>
     <Item name="Choker Grenade" identifier="choker" category="Equipment" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="2" cargocontaineridentifier="explosivecrate" allowasextracargo="true" tags="smallitem,fireequipment,weapon,explosive,demolitionsexpert,co2grenade" description="An efficient tool to quickly put out small fires and drastically reduce big fires by depleting all the oxygen from the room." Scale="0.5" impactsoundtag="impact_metal_light">
       <PreferredContainer primary="firecab" secondary="engcab" />
