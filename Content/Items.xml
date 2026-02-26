@@ -747,52 +747,111 @@
       <QualityStat stattype="ExplosionDamage" value="0.1" />
     </Quality>
   </Item>
-  <Item name="Blackhole" identifier="blackhole" category="Weapon" scale="0.2" sonarsize="2" hideinmenus="true">
-      <Sprite texture="%ModDir%/brapper.png" sourcerect="0,0,512,512" depth="0.55" origin="0.5,0.5" />
-      <Body width="170" height="10" density="20" />
-      <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-100,0" handle2="10,0" aimable="false" />
-      <Projectile damagedoors="true" removeonhit="false" characterusable="false" launchimpulse="32.0" sticktocharacters="false" sticktoitems="false" sticktostructures="false" sticktodeflective="false" sticktodoors="false" sticktolighttargets="false">
-        <Attack structuredamage="500" ballastfloradamage="200" itemdamage="500" ranged="true" levelwalldamage="500" targetforce="100" severlimbsprobability="1000" penetration="1000" duration="3" targetimpulse="100">
-          <Affliction identifier="explosiondamage" strength="1000" />
-          <Affliction identifier="stun" strength="1000" />
-        </Attack>
-        <StatusEffect type="OnImpact" target="NearbyCharacters" delay="0" range="300" stackable="false">
-          <RemoveCharacter />
+  <Item name="" identifier="blackhole" category="Alien" subcategory="devices" linkable="true" scale="0.5" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="300">
+    <Body radius="175" bodytype="Static" />
+    <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" depth="0.84" sourcerect="21,1367,395,395" origin="0.5,0.5" />
+    <DecorativeSprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="226,700,301,296" depth="0.78" origin="0.5,0.5" offset="0,-375" />
+    <!-- empty sprite (disappears when broken) -->
+    <BrokenSprite name="gravitysphere_broken" texture="Content/Items/Alien/AlienRuins_Items.png" depth="0.83" sourcerect="0,0,1,1" origin="0.5,0.5" fadein="false" />
+    <LightComponent range="600" lightcolor="140,197,180,111" IsOn="true" castshadows="true" allowingameediting="false" flicker="0.2" flickerspeed="5.0" pulsefrequency="0.2" pulseamount="0.4">
+      <sprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="1075,1367,395,395" origin="0.5,0.5" />
+      <StatusEffect type="OnNotContained" target="This">
+        <sound file="Content/Items/Alien/ALIEN_gravitySphereLoop.ogg" range="800.0" loop="true" dontmuffle="true" />
+      </StatusEffect>
+    </LightComponent>
+    <!--Apply force towards the center at range 1000-->
+    <TriggerComponent triggeredby="Human, Item" force="75" radius="1000" distancebasedforce="true">
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="gravityspherefx" particleamount="1" emitinterval="1.25" />
+      </StatusEffect>
+    </TriggerComponent>
+    <!--Start damaging entities at range 500-->
+    <TriggerComponent triggeredby="Human, Item" force="45" radius="500">
+      <Upgrade gameversion="1.6.4.0" force="45" />
+      <Attack onlyhumans="true">
+        <Affliction identifier="radiationsickness" strength="5" />
+      </Attack>
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="gravityspherefx2" particlespersecond="3" />
+        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="400" distancemax="500" velocitymin="-500" velocitymax="-900" particlespersecond="200" colormultiplier="255,180,255,255" />
+      </StatusEffect>
+    </TriggerComponent>
+    <!--Heavily damage entities close to the center-->
+    <TriggerComponent triggeredby="Human, Item" force="25" radius="100">
+      <Upgrade gameversion="1.6.4.0" force="25" />
+      <Attack onlyhumans="true">
+        <Affliction identifier="internaldamage" strength="8" />
+      </Attack>
+      <StatusEffect type="OnNotContained" target="This">
+        <ParticleEmitter particle="gravityspherefx2" particlespersecond="5" scalemin="0.7" scalemax="0.7" />
+        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="300" distancemax="400" velocitymin="-700" velocitymax="-1200" particlespersecond="100" colormultiplier="255,180,255,255" />
+      </StatusEffect>
+    </TriggerComponent>
+    <ConnectionPanel canbeselected="true" hudpriority="10" locked="True" allowingameediting="False">
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <input name="toggle" displayname="connection.togglestate" />
+      <input name="set_state" displayname="connection.setstate" />
+      <output name="state_out" displayname="connection.stateout" fallbackdisplayname="connection.signalout" />
+      <!--Break the item when a shutdown signal is received-->
+      <input name="shutdown" displayname="connection.shutdown">
+        <StatusEffect type="OnUse" target="This" condition="-100" setvalue="true" />
+      </input>
+      <StatusEffect type="OnDamaged" target="This">
+        <ParticleEmitter particle="plasmaspark" drawontop="true" particleamount="5" scalemin="0.3" scalemax="0.5" velocitymin="300" velocitymax="800" anglemin="0" anglemax="360" />
+        <ParticleEmitter particle="risingbubbles" particleamount="1" anglemin="90" anglemax="90" velocitymin="50" velocitymax="100" scalemin="0.5" scalemax="1" />
+        <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="2000" />
+      </StatusEffect>
+      <StatusEffect type="OnDamaged" target="This" isActive="false" Duration="1" stackable="false" />
+      <StatusEffect type="OnBroken" target="This" setvalue="true" noninteractable="true">
+        <ParticleEmitter particle="underwaterexplosionfast" particleamount="3" anglemin="0" anglemax="360" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2.5" />
+        <ParticleEmitter particle="risingbubbles" particleamount="1" anglemin="90" anglemax="90" velocitymin="50" velocitymax="100" scalemin="1" scalemax="2" startdelaymin="0.1" startdelaymax="0.3" />
+        <sound file="Content/Sounds/Damage/Implode.ogg" range="50000" dontmuffle="true" soundselectionmode="All" />
+        <sound file="Content/Items/Weapons/Emp.ogg" dontmuffle="true" range="100000" />
+      </StatusEffect>
+    </ConnectionPanel>
+  </Item>
+    <Item name="Choker Grenade" identifier="choker" category="Equipment" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="2" cargocontaineridentifier="explosivecrate" allowasextracargo="true" tags="smallitem,fireequipment,weapon,explosive,demolitionsexpert,co2grenade" description="An efficient tool to quickly put out small fires and drastically reduce big fires by depleting all the oxygen from the room." Scale="0.5" impactsoundtag="impact_metal_light">
+      <PreferredContainer primary="firecab" secondary="engcab" />
+      <Price baseprice="130" sold="false">
+        <Price storeidentifier="merchantoutpost" multiplier="1.1" />
+        <Price storeidentifier="merchantcity" multiplier="1.3" />
+        <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        <Price storeidentifier="merchantmilitary" />
+        <Price storeidentifier="merchantmine" multiplier="0.9" />
+      </Price>
+      <Deconstruct time="5">
+        <Item identifier="plastic" />
+        <Item identifier="sodium" mincondition="1.0" />
+      </Deconstruct>
+      <GreaterComponent canbeselected="false" allowingameediting="false" timeframe="0" />
+      <Fabricate suitablefabricators="fabricator" requiredtime="20" >
+        <RequiredSkill identifier="mechanical" level="35" />
+        <RequiredItem identifier="plastic" />
+        <RequiredItem identifier="sodium" />
+        <RequiredItem identifier="sodium" />
+      </Fabricate>
+      <InventoryIcon texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="555,446,62,62" origin="0.5,0.5" />
+      <Sprite texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="618,446,28,61" depth="0.55" origin="0.5,0.5" />
+      <Body width="26" height="60" density="15" />
+      <ItemComponent characterusable="false">
+        <!-- set the condition to 0 if the item was used (triggered) in a detonator -->
+        <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" disabledeltatime="true" delay="2" />
+        <!-- play an explosion sound effect and create an invisible explosion with a little bit of force to push things when the item breaks -->
+        <StatusEffect type="OnBroken" target="This">
+          <sound file="Content/Items/Weapons/StunGrenade.ogg" range="2000" />
+          <Explosion range="200" force="0.5" smoke="false" flames="false" underwaterbubble="false" sparks="false" />
         </StatusEffect>
-        <StatusEffect type="OnNotContained" target="NearbyCharacters" delay="0.1" range="50" stackable="false">
-          <RemoveCharacter />
+        <!-- remove oxygen from the room for 10 seconds when the item breaks -->
+        <StatusEffect type="OnBroken" target="This,Hull" duration="10.0" oxygen="-100000.0" />
+        <!-- play sounds for 10 seconds when the item breaks -->
+        <StatusEffect type="OnBroken" target="This" duration="10.0" soundselectionmode="All">
+          <sound file="Content/Items/Tools/Sprayer.ogg" range="1000" volume="0.5" />
         </StatusEffect>
-      </Projectile>
-      <LightComponent lightcolor="255,255,255,255" range="1" powerconsumption="0" allowingameediting="false" castshadows="false" IsOn="true">
-        <Sprite name="hollowpurple" texture="%ModDir%/brapper.png" sourcerect="0,0,512,512" origin="0.5,0.5" depth="0.6" />
-        <StatusEffect type="Always" target="This" scale="-0.02" condition="-1">
-          <ParticleEmitter particle="ElectricShock" burstamount="3" particlespersecond="5" velocitymin="0" velocitymax="0" anglemin="0" anglemax="360" scalemin="5.0" scalemax="5.0" colormultiplier="0,0,0,255" />
-        </StatusEffect>
-        <StatusEffect type="OnNotContained" target="This" delay="0.2" stackable="false" Comparison="And">
-          <Conditional scale="gt 0.1" />
-          <Conditional scale="lt 2.5" />
-          <Explosion range="600" force="-50" stun="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="false" camerashake="30" camerashakerange="150" underwaterbubble="false" structuredamage="500" itemdamage="500" flashrange="300" flashduration="10" />
-        </StatusEffect>
-        <StatusEffect delay="0" stackable="false" type="Always" target="This">
-          <Conditional scale="lt 0.1" />
-          <Conditional scale="gt 2.5" />
-          <Remove />
-        </StatusEffect>
-        <StatusEffect delay="0.0" stackable="false" type="Always" target="This" setvalue="true" condition="0">
-          <Conditional scale="gt 6.0" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 95" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 80" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 55" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.05">
-          <Conditional Condition="gt 15" />
-        </StatusEffect>
-      </LightComponent>
+      </ItemComponent>
+      <Throwable slots="Any,RightHand,LeftHand" holdpos="0,0" handle1="0,0" throwforce="3.5" msg="ItemMsgPickUpSelect">
+        <!-- break the item automatically after 2 seconds if it didn't come into contact with fire after it was thrown -->
+        <StatusEffect type="OnSecondaryUse" target="This" condition="0" setvalue="true" delay="2" disabledeltatime="true" stackable="false" />
+      </Throwable>
     </Item>
 </Items>
