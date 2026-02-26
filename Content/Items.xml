@@ -70,7 +70,7 @@
     <Deconstruct time="10">
       <Item identifier="titaniumaluminiumalloy" />
     </Deconstruct>
-    <Sprite texture="Content/Items/Jobgear/TalentGear.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%\flamesword.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
     <Body width="153" height="14" density="30" />
     <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
       <Attack targetimpulse="2" severlimbsprobability="0.55" itemdamage="6" structuredamage="1" structuresoundtype="StructureSlash">
@@ -708,8 +708,6 @@
       <StatusEffect type="OnBroken" target="This">
         <sound file="Content/Items/Weapons/StunGrenade.ogg" />
         <Explosion range="500" ballastfloradamage="0" itemdamage="0" force="0.5" sparks="true" shockwave="false" flames="false" smoke="false" flash="true">
-          <Affliction identifier="acidburn" strength="30" />
-          <Affliction identifier="acidburn" strength="15" probability="0.2" dividebylimbcount="false" />
           <Affliction identifier="stun" strength="0.5" />
         </Explosion>
       </StatusEffect>
