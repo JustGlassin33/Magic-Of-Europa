@@ -70,9 +70,10 @@
     <Deconstruct time="10">
       <Item identifier="titaniumaluminiumalloy" />
     </Deconstruct>
-    <Sprite texture="%ModDir%\flamesword.png" sourcerect="0,484,153,18" depth="0.55" origin="0.5,0.5" />
-    <Body width="153" height="14" density="30" />
-    <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="35,10" handle1="-28,0" holdangle="30" aimangle="20" reload="0.75" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
+    <InventoryIcon texture="%ModDir%\flamesword.png" sourcerect="25,25,393,376" origin="0.5,0.5" />
+    <Sprite texture="%ModDir%\flamesword.png" sourcerect="25,25,393,376" depth="0.55" origin="0.5,0.5" />
+    <Body width="100" height="14" density="30" />
+    <MeleeWeapon slots="Any,RightHand+LeftHand" holdpos="60,0" aimpos="70,10" handle1="-35,-35" handle2="-40,-40" holdangle="10" aimangle="20" reload="1" range="75" combatPriority="30" msg="ItemMsgPickUpSelect">
       <Attack targetimpulse="2" severlimbsprobability="0.55" itemdamage="6" structuredamage="1" structuresoundtype="StructureSlash">
         <Affliction identifier="lacerations" strength="19" />
         <Affliction identifier="burn" strength="30" />
@@ -111,9 +112,13 @@
     <SkillRequirementHint identifier="medical" level="50" />
     <!--Fire particle effect for the sword-->
     <LightComponent range="0" lightcolor="0,0,0,0" castshadows="false" powerconsumption="0" allowingameediting="false">
-      <StatusEffect type="OnUse" target="This" IsOn="false" setvalue="true">
+      <StatusEffect type="OnUse" target="This" IsOn="true" setvalue="true">
         <ParticleEmitter particle="transparentFire" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
       </StatusEffect>
+      <StatusEffect type="OnActive" target="This" IsOn="true" setvalue="true">
+        <ParticleEmitter particle="flames" AngleMax="360" DistanceMin="3" DistanceMax="3" ScaleMin="1" ScaleMultiplier="2,1" ParticleAmount="10" ParticlesPerSecond="10" Distance="3" />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" IsOn="false" setvalue="true"/>
     </LightComponent>
     <!--Transform Gui-->
     <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
@@ -756,12 +761,12 @@
       <StatusEffect type="OnNotContained" target="This">
         <sound file="Content/Items/Alien/ALIEN_gravitySphereLoop.ogg" range="800.0" loop="true" dontmuffle="true" />
       </StatusEffect>
-       <!-- remove after 10 seconds  -->
-        <StatusEffect type="OnNotContained" target="This" delay="10" disabledeltatime="true">
+      <!-- remove after 10 seconds  -->
+      <StatusEffect type="OnNotContained" target="This" delay="10" disabledeltatime="true">
         <Remove />
       </StatusEffect>
-    <!--Apply force towards the center at range 1000-->
-      <StatusEffect type="OnNotContained" target="This" force="75" radius="1000" distancebasedforce="true" >
+      <!--Apply force towards the center at range 1000-->
+      <StatusEffect type="OnNotContained" target="This" force="75" radius="1000" distancebasedforce="true">
         <ParticleEmitter particle="gravityspherefx" particleamount="1" emitinterval="1.25" />
       </StatusEffect>
       <StatusEffect type="OnNotContained" target="This">
@@ -771,73 +776,73 @@
         <ParticleEmitter particle="gravityspherefx2" particlespersecond="5" scalemin="0.7" scalemax="0.7" />
       </StatusEffect>
       <StatusEffect type="OnNotContained" target="This" delay="0.2" stackable="false" Comparison="And">
-          <Conditional scale="gt 0.1" />
-          <Conditional scale="lt 2.5" />
-          <Explosion range="600" force="-50" stun="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="false" camerashake="30" camerashakerange="150" underwaterbubble="false" structuredamage="500" itemdamage="500" flashrange="300" flashduration="10" />
-        </StatusEffect>
-        <StatusEffect delay="0" stackable="false" type="Always" target="This">
-          <Conditional scale="lt 0.1" />
-          <Conditional scale="gt 2.5" />
-          <Remove />
-        </StatusEffect>
-        <StatusEffect delay="0.0" stackable="false" type="Always" target="This" setvalue="true" condition="0">
-          <Conditional scale="gt 6.0" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 95" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 80" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.03">
-          <Conditional Condition="gt 55" />
-        </StatusEffect>
-        <StatusEffect type="Always" target="This" scale="0.05">
-          <Conditional Condition="gt 15" />
-        </StatusEffect>
-    </LightComponent>   
+        <Conditional scale="gt 0.1" />
+        <Conditional scale="lt 2.5" />
+        <Explosion range="600" force="-50" stun="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="false" camerashake="30" camerashakerange="150" underwaterbubble="false" structuredamage="500" itemdamage="500" flashrange="300" flashduration="10" />
+      </StatusEffect>
+      <StatusEffect delay="0" stackable="false" type="Always" target="This">
+        <Conditional scale="lt 0.1" />
+        <Conditional scale="gt 2.5" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect delay="0.0" stackable="false" type="Always" target="This" setvalue="true" condition="0">
+        <Conditional scale="gt 6.0" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" scale="0.03">
+        <Conditional Condition="gt 95" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" scale="0.03">
+        <Conditional Condition="gt 80" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" scale="0.03">
+        <Conditional Condition="gt 55" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" scale="0.05">
+        <Conditional Condition="gt 15" />
+      </StatusEffect>
+    </LightComponent>
   </Item>
-    <Item name="Choker Grenade" identifier="choker" category="Equipment" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="2" cargocontaineridentifier="explosivecrate" allowasextracargo="true" tags="smallitem,fireequipment,weapon,explosive,demolitionsexpert,co2grenade" description="An efficient tool to quickly put out small fires and drastically reduce big fires by depleting all the oxygen from the room." Scale="0.5" impactsoundtag="impact_metal_light">
-      <PreferredContainer primary="firecab" secondary="engcab" />
-      <Price baseprice="130" sold="false">
-        <Price storeidentifier="merchantoutpost" multiplier="1.1" />
-        <Price storeidentifier="merchantcity" multiplier="1.3" />
-        <Price storeidentifier="merchantresearch" multiplier="1.2" />
-        <Price storeidentifier="merchantmilitary" />
-        <Price storeidentifier="merchantmine" multiplier="0.9" />
-      </Price>
-      <Deconstruct time="5">
-        <Item identifier="plastic" />
-        <Item identifier="sodium" mincondition="1.0" />
-      </Deconstruct>
-      <GreaterComponent canbeselected="false" allowingameediting="false" timeframe="0" />
-      <Fabricate suitablefabricators="fabricator" requiredtime="20" >
-        <RequiredSkill identifier="mechanical" level="35" />
-        <RequiredItem identifier="plastic" />
-        <RequiredItem identifier="sodium" />
-        <RequiredItem identifier="sodium" />
-      </Fabricate>
-      <InventoryIcon texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="555,446,62,62" origin="0.5,0.5" />
-      <Sprite texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="618,446,28,61" depth="0.55" origin="0.5,0.5" />
-      <Body width="26" height="60" density="15" />
-      <ItemComponent characterusable="false">
-        <!-- set the condition to 0 if the item was used (triggered) in a detonator -->
-        <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" disabledeltatime="true" delay="2" />
-        <!-- play an explosion sound effect and create an invisible explosion with a little bit of force to push things when the item breaks -->
-        <StatusEffect type="OnBroken" target="This">
-          <sound file="Content/Items/Weapons/StunGrenade.ogg" range="2000" />
-          <Explosion range="200" force="0.5" smoke="false" flames="false" underwaterbubble="false" sparks="false" />
-        </StatusEffect>
-        <!-- remove oxygen from the room for 10 seconds when the item breaks -->
-        <StatusEffect type="OnBroken" target="This,Hull" duration="10.0" oxygen="-100000.0" />
-        <!-- play sounds for 10 seconds when the item breaks -->
-        <StatusEffect type="OnBroken" target="This" duration="10.0" soundselectionmode="All">
-          <sound file="Content/Items/Tools/Sprayer.ogg" range="1000" volume="0.5" />
-        </StatusEffect>
-      </ItemComponent>
-      <Throwable slots="Any,RightHand,LeftHand" holdpos="0,0" handle1="0,0" throwforce="3.5" msg="ItemMsgPickUpSelect">
-        <!-- break the item automatically after 2 seconds if it didn't come into contact with fire after it was thrown -->
-        <StatusEffect type="OnSecondaryUse" target="This" condition="0" setvalue="true" delay="2" disabledeltatime="true" stackable="false" />
-      </Throwable>
-    </Item>
+  <Item name="Choker Grenade" identifier="choker" category="Equipment" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="2" cargocontaineridentifier="explosivecrate" allowasextracargo="true" tags="smallitem,fireequipment,weapon,explosive,demolitionsexpert,co2grenade" description="An efficient tool to quickly put out small fires and drastically reduce big fires by depleting all the oxygen from the room." Scale="0.5" impactsoundtag="impact_metal_light">
+    <PreferredContainer primary="firecab" secondary="engcab" />
+    <Price baseprice="130" sold="false">
+      <Price storeidentifier="merchantoutpost" multiplier="1.1" />
+      <Price storeidentifier="merchantcity" multiplier="1.3" />
+      <Price storeidentifier="merchantresearch" multiplier="1.2" />
+      <Price storeidentifier="merchantmilitary" />
+      <Price storeidentifier="merchantmine" multiplier="0.9" />
+    </Price>
+    <Deconstruct time="5">
+      <Item identifier="plastic" />
+      <Item identifier="sodium" mincondition="1.0" />
+    </Deconstruct>
+    <GreaterComponent canbeselected="false" allowingameediting="false" timeframe="0" />
+    <Fabricate suitablefabricators="fabricator" requiredtime="20">
+      <RequiredSkill identifier="mechanical" level="35" />
+      <RequiredItem identifier="plastic" />
+      <RequiredItem identifier="sodium" />
+      <RequiredItem identifier="sodium" />
+    </Fabricate>
+    <InventoryIcon texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="555,446,62,62" origin="0.5,0.5" />
+    <Sprite texture="%ModDir:3114087512%/Content/Items/IR-ItemsAtlas.png" sourcerect="618,446,28,61" depth="0.55" origin="0.5,0.5" />
+    <Body width="26" height="60" density="15" />
+    <ItemComponent characterusable="false">
+      <!-- set the condition to 0 if the item was used (triggered) in a detonator -->
+      <StatusEffect type="OnUse" target="This" condition="0" setvalue="true" disabledeltatime="true" delay="2" />
+      <!-- play an explosion sound effect and create an invisible explosion with a little bit of force to push things when the item breaks -->
+      <StatusEffect type="OnBroken" target="This">
+        <sound file="Content/Items/Weapons/StunGrenade.ogg" range="2000" />
+        <Explosion range="200" force="0.5" smoke="false" flames="false" underwaterbubble="false" sparks="false" />
+      </StatusEffect>
+      <!-- remove oxygen from the room for 10 seconds when the item breaks -->
+      <StatusEffect type="OnBroken" target="This,Hull" duration="10.0" oxygen="-100000.0" />
+      <!-- play sounds for 10 seconds when the item breaks -->
+      <StatusEffect type="OnBroken" target="This" duration="10.0" soundselectionmode="All">
+        <sound file="Content/Items/Tools/Sprayer.ogg" range="1000" volume="0.5" />
+      </StatusEffect>
+    </ItemComponent>
+    <Throwable slots="Any,RightHand,LeftHand" holdpos="0,0" handle1="0,0" throwforce="3.5" msg="ItemMsgPickUpSelect">
+      <!-- break the item automatically after 2 seconds if it didn't come into contact with fire after it was thrown -->
+      <StatusEffect type="OnSecondaryUse" target="This" condition="0" setvalue="true" delay="2" disabledeltatime="true" stackable="false" />
+    </Throwable>
+  </Item>
 </Items>
