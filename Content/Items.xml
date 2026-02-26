@@ -759,38 +759,45 @@
         <sound file="Content/Items/Alien/ALIEN_gravitySphereLoop.ogg" range="800.0" loop="true" dontmuffle="true" />
       </StatusEffect>
        <!-- remove after 10 seconds  -->
-        <StatusEffect type="OnNotContained" target="This" delay="15" disabledeltatime="true">
+        <StatusEffect type="OnNotContained" target="This" delay="10" disabledeltatime="true">
         <Remove />
       </StatusEffect>
-    </LightComponent>
     <!--Apply force towards the center at range 1000-->
-    <TriggerComponent triggeredby="Human, Item" force="75" radius="1000" distancebasedforce="true">
-      <StatusEffect type="OnNotContained" target="This">
+      <StatusEffect type="OnNotContained" target="This" force="75" radius="1000" distancebasedforce="true" >
         <ParticleEmitter particle="gravityspherefx" particleamount="1" emitinterval="1.25" />
       </StatusEffect>
-    </TriggerComponent>
-    <!--Start damaging entities at range 500-->
-    <TriggerComponent triggeredby="Human, Item" force="45" radius="500">
-      <Upgrade gameversion="1.6.4.0" force="45" />
-      <Attack onlyhumans="true">
-        <Affliction identifier="radiationsickness" strength="5" />
-      </Attack>
       <StatusEffect type="OnNotContained" target="This">
         <ParticleEmitter particle="gravityspherefx2" particlespersecond="3" />
-        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="400" distancemax="500" velocitymin="-500" velocitymax="-900" particlespersecond="200" colormultiplier="255,180,255,255" />
       </StatusEffect>
-    </TriggerComponent>
-    <!--Heavily damage entities close to the center-->
-    <TriggerComponent triggeredby="Human, Item" force="25" radius="100">
-      <Upgrade gameversion="1.6.4.0" force="25" />
-      <Attack onlyhumans="true">
-        <Affliction identifier="internaldamage" strength="8" />
-      </Attack>
       <StatusEffect type="OnNotContained" target="This">
         <ParticleEmitter particle="gravityspherefx2" particlespersecond="5" scalemin="0.7" scalemax="0.7" />
-        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="300" distancemax="400" velocitymin="-700" velocitymax="-1200" particlespersecond="100" colormultiplier="255,180,255,255" />
       </StatusEffect>
-    </TriggerComponent>
+      <StatusEffect type="OnNotContained" target="This" delay="0.2" stackable="false" Comparison="And">
+          <Conditional scale="gt 0.1" />
+          <Conditional scale="lt 2.5" />
+          <Explosion range="600" force="-50" stun="10" flash="true" shockwave="true" sparks="true" flames="false" smoke="false" camerashake="30" camerashakerange="150" underwaterbubble="false" structuredamage="500" itemdamage="500" flashrange="300" flashduration="10" />
+        </StatusEffect>
+        <StatusEffect delay="0" stackable="false" type="Always" target="This">
+          <Conditional scale="lt 0.1" />
+          <Conditional scale="gt 2.5" />
+          <Remove />
+        </StatusEffect>
+        <StatusEffect delay="0.0" stackable="false" type="Always" target="This" setvalue="true" condition="0">
+          <Conditional scale="gt 6.0" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 95" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 80" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.03">
+          <Conditional Condition="gt 55" />
+        </StatusEffect>
+        <StatusEffect type="Always" target="This" scale="0.05">
+          <Conditional Condition="gt 15" />
+        </StatusEffect>
+    </LightComponent>   
   </Item>
     <Item name="Choker Grenade" identifier="choker" category="Equipment" maxstacksize="8" maxstacksizecharacterinventory="1" MaxStackSizeHoldableOrWearableInventory="2" cargocontaineridentifier="explosivecrate" allowasextracargo="true" tags="smallitem,fireequipment,weapon,explosive,demolitionsexpert,co2grenade" description="An efficient tool to quickly put out small fires and drastically reduce big fires by depleting all the oxygen from the room." Scale="0.5" impactsoundtag="impact_metal_light">
       <PreferredContainer primary="firecab" secondary="engcab" />
