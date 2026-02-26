@@ -750,7 +750,7 @@
   <Item name="" identifier="blackhole" category="Alien" subcategory="devices" linkable="true" scale="0.5" damagedbyexplosions="true" damagedbymeleeweapons="true" damagedbyprojectiles="true" damagedbyrepairtools="true" health="300">
     <Body radius="175" bodytype="Static" />
     <Sprite texture="Content/Items/Alien/AlienRuins_Items.png" depth="0.84" sourcerect="21,1367,395,395" origin="0.5,0.5" />
-    <DecorativeSprite texture="Content/Items/Alien/AlienRuins_Items.png" sourcerect="226,700,301,296" depth="0.78" origin="0.5,0.5" offset="0,-375" />
+    <DecorativeSprite texture="Content/Items/Alien/AlienRuins_Items.png" depth="0.84" sourcerect="21,1367,395,395" origin="0.5,0.5" />
     <!-- empty sprite (disappears when broken) -->
     <BrokenSprite name="gravitysphere_broken" texture="Content/Items/Alien/AlienRuins_Items.png" depth="0.83" sourcerect="0,0,1,1" origin="0.5,0.5" fadein="false" />
     <LightComponent range="600" lightcolor="140,197,180,111" IsOn="true" castshadows="true" allowingameediting="false" flicker="0.2" flickerspeed="5.0" pulsefrequency="0.2" pulseamount="0.4">
