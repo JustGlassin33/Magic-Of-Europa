@@ -1,0 +1,13 @@
+-use particle effect from black hole grenade to show pulsing energy as the fire staff recharges. color it red,may need to add conditions for if projectile is contained if it looks weird while firing after charging,then stoping before shooting
+
+-add afliction to slow character. will be used for ice spell
+
+-configure damage for acid spell. maybe use acid cloud.(acidburn would prob be better for performance)
+
+-make acid machete sprite to go with acid spell
+
+-make confetti png for clown spell explosion
+
+-make clown hammer
+
+-configure spark spell. Maybe chain lightning? look at immersive repairs junction box water shock code
