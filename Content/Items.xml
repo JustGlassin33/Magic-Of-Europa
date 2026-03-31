@@ -845,4 +845,289 @@
       <StatusEffect type="OnSecondaryUse" target="This" condition="0" setvalue="true" delay="2" disabledeltatime="true" stackable="false" />
     </Throwable>
   </Item>
+  <!-- The following Utility items are part of a set that can be transformed into each other by using the custom interface button. -->
+  <Item name="" identifier="magic_flare" category="Equipment" maxstacksize="32" maxstacksizecharacterinventory="1" cargocontaineridentifier="metalcrate" Scale="0.5" tags="smallitem,light,provocative" impactsoundtag="impact_soft" isshootable="true" damagedbymonsters="true" health="10">
+    <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="2" spawnprobability="0.05" />
+    <Price baseprice="30" minavailable="6" sold ="false">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="10" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="1.25" minavailable="8" />
+      <Price storeidentifier="merchantmine" minavailable="10" />
+      <Price storeidentifier="merchantarmory" multiplier="1.25" minavailable="8" />
+    </Price>
+    <Deconstruct time="5" />
+    <Fabricate suitablefabricators="fabricator" requiredtime="10" amount="12">
+      <RequiredItem identifier="flashpowder" amount="2" />
+      <RequiredItem identifier="plastic" />
+    </Fabricate>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,0,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Tools/tools.png" sourcerect="227,204,54,18" depth="0.55" origin="0.5,0.5" />
+    <Body width="50" height="15" density="10" />
+    <Throwable slots="Any,RightHand,LeftHand" holdpos="0,0" handle1="0,0" holdangle="90" throwforce="2.0" aimpos="35,-10" msg="ItemMsgPickUpSelect" DisableWhenRangedWeaponEquipped="true">
+      <StatusEffect type="OnUse" targettype="This" targetitemcomponent="LightComponent" IsOn="true" DontCleanUp="True">
+        <Conditional IsOn="eq False" targetitemcomponent="LightComponent" />
+        <sound file="Content/Items/Tools/FlareIgnite.ogg" range="800.0" />
+      </StatusEffect>
+    </Throwable>
+    <LightComponent LightColor="255,0.0,0.0,255" Flicker="0.5" range="600" IsOn="false">
+      <StatusEffect type="OnActive" targettype="This" Condition="-0.025" />
+      <StatusEffect type="OnActive" targettype="This">
+        <Conditional PhysicsBodyActive="eq true" />
+        <ParticleEmitter particle="flare" emitinterval="2.1" particleamount="10" particlespersecond="60" anglemin="70" anglemax="100" velocitymin="100" velocitymax="200" />
+        <ParticleEmitter particle="FlareBubbles" particlespersecond="40" anglemin="70" anglemax="100" velocitymin="100" velocitymax="200" scalemin="0.8" scalemax="1.2" />
+      </StatusEffect>
+      <StatusEffect type="OnBroken" targettype="This" IsOn="false" />
+      <sound file="Content/Items/Tools/FlareLoop.ogg" type="OnActive" range="800.0" loop="true" />
+    </LightComponent>
+    <AiTarget sightrange="4000" />
+    <Upgrade gameversion="0.10.0.0" scale="0.5" />
+  </Item>
+  <Item name="" identifier="flashlight" category="Equipment" Tags="smallitem,tool,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
+    <PreferredContainer primary="divingcab" minamount="1" maxamount="2" spawnprobability="1" notcampaign="true" notpvp="true" />
+    <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab,wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
+    <PreferredContainer secondary="outpostcrewcabinet" amount="1" spawnprobability="0.1" />
+    <Price baseprice="200" minavailable="2">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="3" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+      <Price storeidentifier="merchantmine" />
+    </Price>
+    <Fabricate suitablefabricators="fabricator" requiredtime="10">
+      <RequiredSkill identifier="mechanical" level="25" />
+      <RequiredItem identifier="aluminium" amount="2" />
+      <RequiredItem tag="lightcomponent" />
+    </Fabricate>
+    <Deconstruct time="15">
+      <Item identifier="aluminium" />
+      <Item identifier="lightcomponent" />
+    </Deconstruct>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="704,320,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Tools/tools.png" sourcerect="293,185,49,18" depth="0.55" origin="0.5,0.5" />
+    <Body width="48" height="15" density="15" />
+    <Holdable slots="Any,RightHand,LeftHand,Head" holdpos="30,-50" aimpos="60,0" handle1="-20,0" msg="ItemMsgPickUpSelect">
+      <StatusEffect type="OnActive" targettype="Contained" Condition="-0.2">
+        <RequiredItem items="mobilebattery" type="Contained" />
+      </StatusEffect>
+      <!-- the child LightComponent is only active when the Holdable is active, i.e. when the item is being held -->
+      <LightComponent LightColor="0.5,0.5,0.5,1.0" directional="true" Flicker="0.02" range="800" powerconsumption="10" IsOn="true">
+        <LightTexture texture="Content/Lights/lightcone.png" origin="0.0, 0.5" size="1.0,1.0" />
+        <IsActive targetcontaineditem="true" condition="gt 1.0" />
+      </LightComponent>
+      <LightComponent LightColor="0.5,0.5,0.5,1.0" directional="true" range="800" powerconsumption="10" IsOn="true" flicker="0.8" flickerspeed="1.0" pulsefrequency="0.1" pulseamount="0.5">
+        <LightTexture texture="Content/Lights/lightcone.png" origin="0.0, 0.5" size="1.0,1.0" />
+        <IsActive targetcontaineditem="true" condition="lte 1.0" />
+      </LightComponent>
+    </Holdable>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="battery">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <Containable items="mobilebattery">
+        <StatusEffect type="OnContaining" targettype="This" Voltage="1.0" setvalue="true" />
+      </Containable>
+    </ItemContainer>
+    <AiTarget sightrange="3000" />
+    <Upgrade gameversion="0.10.0.0" scale="0.5" />
+  </Item>
+  <Item name="" identifier="handheldsonar" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
+    <Preferredcontainer secondary="respawncontainer" amount="1" spawnprobability="1" notcampaign="true" />
+    <PreferredContainer primary="divingcab" amount="1" spawnprobability="1" notcampaign="true" notpvp="true" />
+    <PreferredContainer secondary="wreckstoragecab,wreckdivingcab" amount="1" spawnprobability="0.05" />
+    <Price baseprice="150" minavailable="1">
+      <Price storeidentifier="merchantoutpost" />
+      <Price storeidentifier="merchantcity" minavailable="1" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" minavailable="2" />
+      <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+      <Price storeidentifier="merchantmine" />
+      <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="2" />
+    </Price>
+    <Deconstruct time="15">
+      <Item identifier="copper" />
+      <Item identifier="plastic" amount="2" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="20">
+      <RequiredSkill identifier="mechanical" level="30" />
+      <RequiredItem identifier="fpgacircuit" />
+      <RequiredItem identifier="plastic" />
+    </Fabricate>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="64,0,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Tools/tools.png" sourcerect="227,163,48,24" depth="0.55" origin="0.5,0.5" />
+    <Body width="40" height="22" density="12" />
+    <AiTarget sight="500" staticsight="true" />
+    <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-25,0" msg="ItemMsgPickUpSelect" />
+    <Sonar range="6000.0" powerconsumption="10" drawhudwhenequipped="true" detectsubmarinewalls="true" displaybordersize="-0.1" characterusable="false" hasmineralscanner="true" allowuioverlap="true">
+      <StatusEffect type="OnUse" targettype="Contained" Condition="-1.0" disabledeltatime="true">
+        <RequiredItem items="mobilebattery" type="Contained" />
+      </StatusEffect>
+      <sound file="Content/Items/Command/SonarPing.ogg" type="OnUse" range="1000.0" frequencymultiplier="1.5" />
+      <GuiFrame relativesize="0.4,0.4" anchor="CenterLeft" relativeoffset="0.006,-0.01" />
+      <PingCircle texture="Content/Items/Command/pingCircle.png" origin="0.5,0.5" />
+      <DirectionalPingCircle texture="Content/Items/Command/directionalPingCircle.png" origin="0.0,0.5" />
+      <ScreenOverlay texture="Content/Items/Command/sonarOverlay.png" origin="0.5,0.5" />
+      <ScreenBackground texture="Content/Items/Command/sonarBackground.png" origin="0.5,0.5" />
+      <DirectionalPingBackground texture="Content/Items/Command/directionalPingBackground.png" origin="0.5,0.5" />
+      <DirectionalPingButton index="0" texture="Content/Items/Command/directionalPingButton.png" sourcerect="0,0,91,266" origin="-4.5275,0.5" />
+      <DirectionalPingButton index="1" texture="Content/Items/Command/directionalPingButton.png" sourcerect="133,0,91,266" origin="-4.5275,0.5" />
+      <DirectionalPingButton index="2" texture="Content/Items/Command/directionalPingButton.png" sourcerect="266,0,91,266" origin="-4.5275,0.5" />
+      <Blip texture="Content/Items/Command/sonarBlip.png" origin="0.5,0.5" />
+      <LineSprite texture="Content/Items/Command/NavUI.png" sourcerect="181,141,109,4" origin="0,0.5" />
+      <icon identifier="outpost" texture="Content/UI/MainIconsAtlas.png" sourcerect="352,398,16,8" origin="0.5,0.5" />
+      <icon identifier="submarine" texture="Content/UI/MainIconsAtlas.png" sourcerect="353,407,14,6" origin="0.5,0.5" />
+      <icon identifier="shuttle" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,407,8,6" origin="0.5,0.5" />
+      <icon identifier="artifact" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,414,8,8" origin="0.5,0.5" />
+      <icon identifier="location" texture="Content/UI/MainIconsAtlas.png" sourcerect="349,435,11,11" origin="0.5,0.5" />
+      <icon identifier="mineral" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,434,7,12" origin="0.5,0.5" />
+      <icon identifier="" texture="Content/UI/MainIconsAtlas.png" sourcerect="346,416,4,4" origin="0.5,0.5" />
+      <LightComponent LightColor="120,255,120,255" range="25" powerconsumption="10" pulsefrequency="0.5" pulseamount="0.8" castshadows="false" IsOn="false" canbeselected="false">
+        <IsActive TargetItemComponent="Sonar" CurrentMode="Active" />
+      </LightComponent>
+    </Sonar>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="battery">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <Containable items="mobilebattery">
+        <StatusEffect type="OnContaining" targettype="This" Voltage="1.0" setvalue="true" />
+      </Containable>
+    </ItemContainer>
+    <Upgrade gameversion="0.10.0.0" scale="0.5" />
+  </Item>
+    <Item name="" identifier="sonarbeacon" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_plastic">
+    <PreferredContainer primary="divingcab" amount="1" spawnprobability="1" notcampaign="true" />
+    <PreferredContainer secondary="wreckstoragecab,wreckdivingcab" amount="1" spawnprobability="0.05" />
+    <Price baseprice="150" minavailable="1">
+      <Price storeidentifier="merchantoutpost" sold="false" />
+      <Price storeidentifier="merchantcity" />
+      <Price storeidentifier="merchantresearch" multiplier="1.25" />
+      <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+      <Price storeidentifier="merchantmine" />
+      <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="2" />
+    </Price>
+    <Deconstruct time="15">
+      <Item identifier="copper" />
+      <Item identifier="plastic" amount="2" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="15">
+      <RequiredSkill identifier="mechanical" level="30" />
+      <RequiredItem identifier="fpgacircuit" />
+      <RequiredItem identifier="plastic" />
+    </Fabricate>
+    <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="832,320,64,64" origin="0.5,0.5" />
+    <Sprite texture="Content/Items/Tools/tools.png" sourcerect="473,1,29,65" depth="0.55" origin="0.5,0.5" />
+    <Body width="27" height="60" density="12" />
+    <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="0,-15" msg="ItemMsgPickUpSelect" />
+    <AiTarget soundrange="50000" sonarlabel="entityname.sonarbeacon" sight="500" staticsight="true" />
+    <LightComponent LightColor="0.0,1.0,0.0,1.0" range="50" powerconsumption="10" blinkfrequency="2" IsOn="false" canbeselected="false">
+      <StatusEffect type="OnActive" targettype="Contained" Condition="-0.1">
+        <RequiredItem items="mobilebattery" type="Contained" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" targettype="This" SoundRange="50000" setvalue="true">
+        <Conditional Voltage="gt 0.5" targetitemcomponent="LightComponent" />
+        <sound file="Content/Items/Weapons/SonarDecoy.ogg" range="500.0" loop="true" volume="0.25" />
+      </StatusEffect>
+    </LightComponent>
+    <CustomInterface canbeselected="false" drawhudwhenequipped="true" allowuioverlap="true">
+      <GuiFrame relativesize="0.16,0.15" anchor="CenterLeft" pivot="BottomLeft" relativeoffset="0.006,-0.05" style="ItemUI" />
+      <TickBox text="sonarbeacon.beaconactive">
+        <StatusEffect type="OnUse" targettype="This" IsOn="true" />
+        <StatusEffect type="OnSecondaryUse" targettype="This" IsOn="false" />
+      </TickBox>
+      <TextBox text="sonarbeacon.beaconsignal" propertyname="SonarLabel" maxtextlength="32" />
+    </CustomInterface>
+    <ItemContainer capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorstyle="battery">
+      <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <Containable items="mobilebattery">
+        <StatusEffect type="OnContaining" targettype="This" Voltage="1.0" setvalue="true" />
+      </Containable>
+    </ItemContainer>
+  </Item>
 </Items>
+
+
+
+
+
+
+
+
+
+
+<!-- Lukako stave for reference-->
+ <Item name="" description="" identifier="luma-staff-frieren" scale="0.2"> 
+        <Sprite texture="%ModDir%/Textures/Staff_Frieren.png" sourcerect="48,58,721,109" depth="0.55" origin="0.5,0.5" />
+        <Body width="189" height="60" density="50" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="-20,-30" handle1="-45,20" handle2="70,5" holdangle="70" aimpos="40,-30" aimangle="0" msg="ItemMsgPickUpSelect">
+            <!-- Spawn spells depending on mana levels -->
+            <StatusEffect type="OnSecondaryUse" target="This,Character" targetitemcomponent="Powered" disabledeltatime="true" comparison="and" interval="1">
+                <RequiredItems tags="luma-spell" type="Contained" targetslot="0" RequireEmpty="true"/>
+                <Conditional ManuallySelectedSound="eq 0"/>
+                <Conditional luma-mana="gt 10"/>
+                    <SpawnItem identifier="luma-spell-basic_offensive_magic" spawnposition="ThisInventory" />
+                    <Affliction identifier="luma-mana" strength="-10"/>
+            </StatusEffect>
+
+            <StatusEffect type="OnSecondaryUse" target="This,Character" targetitemcomponent="Powered" disabledeltatime="true" comparison="and" interval="1">
+                <RequiredItems item="luma-spell-basic_offensive_magic" type="Contained" targetslot="0" RequireEmpty="true"/>
+                <Conditional ManuallySelectedSound="eq 1"/>
+                <Conditional luma-mana="gt 5"/>
+                    <SpawnItem identifier="luma-spell-basic_offensive_magic" spawnposition="ThisInventory" />
+                    <Affliction identifier="luma-mana" strength="-5"/>
+            </StatusEffect>
+        </Holdable>
+        
+        <!-- Spell Inventory: -->
+        <!-- Stores the 'Spell' to fire. Invisible, uninteractable. The 'Spell' items should self-destroy if not contained to prevent glitched states. Required! Only has one at a time. -->
+        <ItemContainer capacity="1" maxstacksize="1" hideitems="true" removecontaineditemsondeconstruct="true" AllowDragAndDrop="false" QuickUseMovesItemsInside="false" AllowSwappingContainedItems="false" containedstateindicatorstyle="bullet" DrawInventory="true">
+            <!-- Determines which spells can be used -->
+            <Containable items="luma-spell-basic_offensive_magic" />
+        </ItemContainer>
+
+        <!-- Spell Selector: -->
+        <!-- Powered Component's ManuallySelectedSound is hijacked for its variable properties -->
+        <Powered ManuallySelectedSound="0" PowerConsumption="0"/>
+
+        <!-- Spell Selector GUI Element-->  
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.15" anchor="CenterLeft" relativeoffset="0.006,-0.05" style="ItemUI" />
+            <!-- Number / Integer Input sets the ManuallySelectedSound property without SE use; reloading conditionals handle the rest. -->
+            <NumberInput text="Selected Spell" propertyname="ManuallySelectedSound" targetitemcomponent="Powered" min="0" max="1">
+                <!-- Clear the currently stored spell so the reloading conditionals can spawn their new one. -->
+                <StatusEffect Type="OnUse" target="Contained">
+                    <Remove />
+                </StatusEffect>
+            </NumberInput>
+        </CustomInterface>
+
+        <RangedWeapon holdtrigger="true" reload="5" barrelpos="273,10" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.2" MaxChargeTime="2">
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+
+            <RequiredItems tags="luma-spell" type="Contained" targetslot="0" optional="true"/>
+
+            <!-- Change Reload / Charge Speed depending on slotted spell -->
+            <StatusEffect type="OnSecondaryUse" target="This" maxchargetime="2" reload="2" stackable="false" setvalue="true" >
+                <Conditional ManuallySelectedSound="eq 0"/>
+                <RequiredItems item="luma-spell" type="Contained" targetslot="0" />
+            </StatusEffect>
+
+            <StatusEffect type="OnSecondaryUse" target="This" maxchargetime="0.5" reload="0.3" stackable="false" setvalue="true" >
+                <Conditional ManuallySelectedSound="eq 1"/>
+                <RequiredItems tags="luma-spell" type="Contained" targetslot="0" />
+            </StatusEffect>
+
+            <!-- Removes the slotted spell on firing -->
+            <StatusEffect type="OnUse" target="Contained">
+                <Remove />
+            </StatusEffect>
+
+            <!-- Spell Charging: -->
+            <!-- Sound to play while charge duration plays out -->
+            <ChargeSound file="Content/Items/Weapons/WEAPONS_chargeUp.ogg" range="10000"/>
+
+            <!-- Particles that show up during charging -->
+            <ParticleEmitterCharge particle="offensivecharge" particlespersecond="60" scalemin="1.0" scalemax="1.0" anglemax="360" />
+
+            <!-- Particles that show up when weapon is fired -->
+            <ParticleEmitter particle="offensivedot" scalemin="4.0" scalemax="4.0" particleamount="20" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" colormultiplier="255,255,255,255" />
+
+            <!-- Firing Sound -->
+            <sound file="Content/Items/Alien/AlienTurret1.ogg" type="OnUse" range="1000.0" />
+        </RangedWeapon>
+    </Item>
