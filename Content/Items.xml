@@ -884,9 +884,7 @@
     <Upgrade gameversion="0.10.0.0" scale="0.5" />
   </Item>
   <Item name="" identifier="magic_flashlight" category="Equipment" Tags="smallitem,tool,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
-    <PreferredContainer primary="divingcab" minamount="1" maxamount="2" spawnprobability="1" notcampaign="true" notpvp="true" />
-    <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab,wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
-    <PreferredContainer secondary="outpostcrewcabinet" amount="1" spawnprobability="0.1" />
+    <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="1" spawnprobability="0.05" />
     <Price baseprice="30" minavailable="6" sold ="false">
       <Price storeidentifier="merchantoutpost" />
       <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="3" />
@@ -930,9 +928,7 @@
     <Upgrade gameversion="0.10.0.0" scale="0.5" />
   </Item>
   <Item name="" identifier="handheldsonar" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
-    <Preferredcontainer secondary="respawncontainer" amount="1" spawnprobability="1" notcampaign="true" />
-    <PreferredContainer primary="divingcab" amount="1" spawnprobability="1" notcampaign="true" notpvp="true" />
-    <PreferredContainer secondary="wreckstoragecab,wreckdivingcab" amount="1" spawnprobability="0.05" />
+   <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="1" spawnprobability="0.05" />
    <Price baseprice="30" minavailable="6" sold ="false">
       <Price storeidentifier="merchantoutpost" />
       <Price storeidentifier="merchantcity" minavailable="1" />
