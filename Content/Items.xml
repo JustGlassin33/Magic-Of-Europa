@@ -882,6 +882,23 @@
     </LightComponent>
     <AiTarget sightrange="4000" />
     <Upgrade gameversion="0.10.0.0" scale="0.5" />
+    <!-- Item transform GUI Element-->  
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.15" anchor="CenterLeft" relativeoffset="0.006,-0.05" style="ItemUI" />
+            <!-- Number / Integer Input sets the ManuallySelectedSound property without SE use; reloading conditionals handle the rest. -->
+            <NumberInput text="Select Item" >
+                <!-- Remove the current item and spawn the selected item . -->
+              <Button text="transform">
+                <StatusEffect type="OnUse" target="This">
+                  <Remove />
+                  <sound file="Content/Items/JobGear/Clown/ClownExosuitHorn.ogg" type="OnUse" range="5000.0" loop="true" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" targetcontainer="true">
+                  <SpawnItem identifier="flamesword" spawnposition="SameInventory" />
+                </StatusEffect>
+              </Button>
+            </NumberInput>
+        </CustomInterface>
   </Item>
   <Item name="" identifier="magic_flashlight" category="Equipment" Tags="smallitem,tool,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
     <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="1" spawnprobability="0.05" />
