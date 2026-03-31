@@ -927,7 +927,7 @@
     <AiTarget sightrange="3000" />
     <Upgrade gameversion="0.10.0.0" scale="0.5" />
   </Item>
-  <Item name="" identifier="handheldsonar" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
+  <Item name="" identifier="magic_handheldsonar" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_metal_light">
    <PreferredContainer primary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="1" spawnprobability="0.05" />
    <Price baseprice="30" minavailable="6" sold ="false">
       <Price storeidentifier="merchantoutpost" />
@@ -986,7 +986,7 @@
     </ItemContainer>
     <Upgrade gameversion="0.10.0.0" scale="0.5" />
   </Item>
-    <Item name="" identifier="sonarbeacon" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_plastic">
+    <Item name="" identifier="magic_sonarbeacon" category="Equipment,Diving" Tags="smallitem,sonar,provocative" cargocontaineridentifier="metalcrate" Scale="0.5" impactsoundtag="impact_plastic">
     <PreferredContainer primary="divingcab" amount="1" spawnprobability="1" notcampaign="true" />
     <PreferredContainer secondary="wreckstoragecab,wreckdivingcab" amount="1" spawnprobability="0.05" />
     <Price baseprice="30" minavailable="6" sold ="false">
