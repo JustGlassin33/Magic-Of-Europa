@@ -885,9 +885,8 @@
     <!-- Item transform GUI Element-->  
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.2,0.15" anchor="CenterLeft" relativeoffset="0.006,-0.05" style="ItemUI" />
-            <!-- Number / Integer Input sets the ManuallySelectedSound property without SE use; reloading conditionals handle the rest. -->
-            <NumberInput text="Select Item" >
-                <!-- Remove the current item and spawn the selected item . -->
+                        <NumberInput text="Select Item" >
+                <!-- Remove the current item and spawn the selected item(maybe it's 1 item that uses this gui to set tags that let it do different things.) -->
               <Button text="transform">
                 <StatusEffect type="OnUse" target="This">
                   <Remove />
