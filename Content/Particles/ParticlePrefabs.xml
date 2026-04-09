@@ -34,13 +34,6 @@
     middlecolor="255,255,255,255"
     usemiddlecolor="False"
     priority="1">
-    <animatedsprite
-      texture="%ModDir:3610335130%/Content/Particles/greenflame.png"
-      sourcerect="0,0,2048,2048"
-      columns="10"
-      rows="5"
-      origin="0.5,0.8"
-      premultiplyalpha="false" />
   </fireball>
   <flames
   drawontop="False"
@@ -177,5 +170,3 @@
     sourcerect="0,256,128,128" />
 </Transform_Charge_Fire>
 </prefabs>
-
-
