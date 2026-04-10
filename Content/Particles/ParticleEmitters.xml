@@ -1,0 +1,3 @@
+<ParticleEmitter particle="Transform_Charge_Acid" AngleMax="360" ScaleMultiplier="1,1" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
+<ParticleEmitter particle="Transform_Charge_Fire" AngleMax="360" ScaleMultiplier="1,1" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
+<ParticleEmitter particle="Transform_Charge_Spark" AngleMax="360" ScaleMultiplier="1,1" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
